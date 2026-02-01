@@ -1,50 +1,552 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useInView, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, User, Timer, Menu, X, CheckCircle, ArrowRight, Minus, Plus, ChevronDown, Star, Search, Filter, ThumbsUp, ChevronRight } from 'lucide-react';
+import { ShoppingBag, User, Timer, Menu, X, CheckCircle, ArrowRight, Minus, Plus, ChevronDown, Star, Search, Filter, ThumbsUp, ChevronRight, Trash2, Copy, AlertCircle, ArrowLeft, Clock, BookOpen, Share2 } from 'lucide-react';
 import { Product } from './types';
 
-const PRAXIS_DATA: Product = {
-  id: 'praxis-01',
-  name: 'Praxis',
-  type: '신바이오틱스+',
-  price: 54000,
-  tagline: '장 건강의 미래가 이곳에 있습니다.',
-  description: '당신의 마이크로바이옴을 위에서 아래까지 빈틈없이 케어하기 위해 설계된 임상 등급의 3-in-1 신바이오틱스입니다.',
-  ingredients: [
-    { name: '프리바이오틱스 15mg', source: '미국', location: 'Deerland', description: 'PreforPro® 기술 적용' },
-    { name: '프로바이오틱스 11B CFU', source: '덴마크', location: 'Chr. Hansen', description: 'LGG® & BB-12® 균주' },
-    { name: '포스트바이오틱스 300mg', source: '스페인', location: 'Sevilla', description: 'Tributyrin 함유' }
-  ]
-};
+// Bundle definitions
+const BUNDLES = [
+  {
+    id: 'bundle-6-6',
+    name: 'Praxis 6+6',
+    originalPrice: 840000,
+    salePrice: 410688,
+    perBoxPrice: 33474,
+    discount: '52% OFF',
+    image: "https://images.ctfassets.net/u9fvvze9asat/5xXpW4YxToxXqX9GvWlEwz/a2a3e6c38b2e35c8b3c3b4a2d3e4b5c6/Synbiotic_Product.png"
+  },
+  {
+    id: 'bundle-4-3',
+    name: 'Praxis 4+3',
+    originalPrice: 490000,
+    salePrice: 262080,
+    perBoxPrice: 37440,
+    discount: '47% OFF',
+    image: "https://images.ctfassets.net/u9fvvze9asat/5xXpW4YxToxXqX9GvWlEwz/a2a3e6c38b2e35c8b3c3b4a2d3e4b5c6/Synbiotic_Product.png"
+  },
+  {
+    id: 'bundle-3-2',
+    name: 'Praxis 3+2',
+    originalPrice: 350000,
+    salePrice: 258406,
+    perBoxPrice: 51681,
+    discount: '26% OFF',
+    image: "https://images.ctfassets.net/u9fvvze9asat/5xXpW4YxToxXqX9GvWlEwz/a2a3e6c38b2e35c8b3c3b4a2d3e4b5c6/Synbiotic_Product.png"
+  }
+];
 
-const MarqueeBanner = () => (
-  <div className="bg-[#0047AB] text-white py-2 text-[10px] font-bold uppercase tracking-[0.2em] overflow-hidden whitespace-nowrap relative z-[110]">
+interface CartItem {
+  id: string;
+  name: string;
+  originalPrice: number;
+  salePrice: number;
+  qty: number;
+  image: string;
+}
+
+interface ArticleData {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  readTime: string;
+  content: React.ReactNode;
+}
+
+const ARTICLES_DATA: ArticleData[] = [
+  {
+    id: 'postbiotics',
+    title: "포스트바이오틱스란 무엇인가요? 장 건강 지원의 숨겨진 열쇠",
+    category: "INGREDIENT SCIENCE",
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=800",
+    readTime: "5 min read",
+    content: (
+      <div className="space-y-8">
+        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
+          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+            <li>건강한 장을 유지하는 두 가지 필수 요소인 프리바이오틱스와 프로바이오틱스에 대해 들어보셨을 것입니다. 하지만 그것이 전체 그림의 일부일 뿐이라는 사실을 알고 계셨나요?</li>
+            <li>소화기 건강에 유익한 도움을 줄 수 있는 연구 결과들이 뒷받침하는 '포스트바이오틱스'를 소개합니다. 여기에 포스트바이오틱스에 대해 알아야 할 모든 것이 있습니다.</li>
+          </ul>
+        </div>
+
+        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
+          소화 시스템의 두 가지 핵심 요소인 프리바이오틱스와 프로바이오틱스에 대해서는 아마 들어보셨을 것입니다. 반면, 포스트바이오틱스는 그만큼의 주목을 받지 못하고 있습니다. 많은 사람들이 포스트바이오틱스에 대해 들어본 적조차 없으며, 일상 루틴에 포함시키는 것은 더더욱 고려하지 않습니다.<br/><br/>
+          하지만 최근 연구에 따르면 포스트바이오틱스는 장내 박테리아를 지원하는 데 있어 프리바이오틱스나 프로바이오틱스만큼이나 중요할 수 있습니다. 이것이 바로 우리가 프리바이오틱스, 프로바이오틱스, 그리고 포스트바이오틱스를 하나로 결합하여 획기적인 장 건강 보충제인 Praxis를 만든 이유입니다. 포스트바이오틱스에 대해 알아야 할 사항은 다음과 같습니다.
+        </p>
+
+        <hr className="border-[#E0F2FE]" />
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">포스트바이오틱스란 무엇인가요?</h3>
+        <p className="text-slate-600 leading-loose">
+          포스트바이오틱스는 발효 과정 동안 식품 등급 미생물에 의해 생성되는 생리 활성 화합물로 정의될 수 있습니다. 구체적으로는 장내 "유익균"이 식이섬유를 분해할 때 생성됩니다. 이는 식물 탄수화물의 자연스러운 부산물로서, 단쇄지방산(SCFA)이 생성되는 과정입니다(잠시 후에 더 자세히 설명하겠습니다). 프로바이오틱스가 장 건강을 위해 무대 뒤에서 일하는 것처럼, 포스트바이오틱스도 마찬가지입니다. 하지만 포스트바이오틱스는 프로바이오틱스와 달리 살아있는 미생물이 아닙니다.<br/><br/>
+          장 건강 전략을 유지하기 위해 용어를 정리해 봅시다:
+        </p>
+        <ul className="list-disc list-inside space-y-4 text-slate-600 bg-slate-50 p-6 rounded-2xl">
+          <li><strong>프리바이오틱스(Prebiotics):</strong> 위장관에 존재하는 프로바이오틱스와 유익한 박테리아의 성장을 돕는 소화되지 않는 식품 성분으로 정의할 수 있습니다.</li>
+          <li><strong>프로바이오틱스(Probiotics):</strong> 세계보건기구(WHO)에 따르면 적절한 양을 섭취했을 때 건강상의 이점을 제공하는 살아있는 박테리아로 정의됩니다. 이러한 미생물은 식품(사워크라우트, 김치, 케피어, 콤부차)과 프로바이오틱스 보충제에서 찾을 수 있습니다.</li>
+          <li><strong>포스트바이오틱스(Postbiotics):</strong> 장 내벽을 구성하는 세포에 주요 에너지원을 제공하여 장 장벽 건강과 기능을 지원하는 데 도움을 줍니다.</li>
+        </ul>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">포스트바이오틱스의 이점</h3>
+        <p className="text-slate-600 leading-loose">
+          포스트바이오틱스는 장 내벽을 구성하는 세포에 연료를 공급하고 장 장벽 기능을 지원합니다. 앞서 언급한 발효 과정을 기억하시나요? 실제로 일어나는 일은 다음과 같습니다.<br/><br/>
+          "섭취한 프로바이오틱스와 장에 이미 존재하는 '유익한' 박테리아를 포함한 유익균은 특정 성분, 즉 프리바이오틱스와 일부 유형의 섬유질을 선택적으로 발효시킵니다."라고 Ritual의 수석 과학자인 Arianne Vance, MPH는 설명합니다. "이 발효의 한 가지 결과는 뷰티르산(butyrate), 아세트산(acetate), 프로피온산(propionate)과 같은 단쇄지방산(SCFA)의 생성입니다."<br/><br/>
+          여기서 가장 주목할 만한 것은 <strong>뷰티르산(Butyrate)</strong>입니다. 연구에 따르면 뷰티르산은 결장을 둘러싼 세포의 주요 에너지원입니다. 이것이 바로 우리가 뷰티르산의 공급원으로 트리뷰티린(Tributyrin)을 선택한 이유입니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">포스트바이오틱스 생성을 돕는 방법</h3>
+        <p className="text-slate-600 leading-loose">
+          장내 포스트바이오틱스 농도를 지원하는 방법이 있습니다. 포스트바이오틱스는 앞서 언급한 발효 과정의 최종 결과물 중 하나이므로, 섬유질과 프리바이오틱스를 제공하는 식품 섭취를 늘리는 것이 하나의 선택지가 될 수 있습니다. 이는 자연스럽게 결장에서 포스트바이오틱스 생성을 증가시킬 수 있습니다.<br/><br/>
+          부추, 예루살렘 아티초크, 아스파라거스, 양파, 밀, 마늘, 치커리, 귀리, 콩과 같은 식품에는 프리바이오틱스가 풍부합니다. 건강한 장내 세균을 돕는 음식을 충분히 섭취하는 것(섬유질 및 프리바이오틱스 식품)은 전반적인 소화기 건강을 지원하는 데 도움이 될 수 있습니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">포스트바이오틱스 보충제에서 확인해야 할 것</h3>
+        <p className="text-slate-600 leading-loose">
+          프리바이오틱스, 프로바이오틱스, 포스트바이오틱스를 섭취하는 것이 그 어느 때보다 쉬워졌습니다. Praxis를 루틴에 추가함으로써 현대 생활의 피할 수 없는 장애물들—까다로운 식성, 바쁜 일정, 특정 음식에 대한 제한된 접근 등—을 우회할 수 있습니다. 식단이나 라이프스타일이 어떠하든 장 건강을 지원하는 것은 중요합니다. 다만 임상적으로 연구된 포스트바이오틱스가 포함되어 있는지 확인하세요. 참고로: 트리뷰티린(Tributyrin)은 300mg 용량에서 임상적으로 연구되었으며, 이는 Praxis에 포함된 양과 동일합니다. 포스트바이오틱스는 프리바이오틱스나 프로바이오틱스만큼 널리 이용 가능하지 않으므로, 고품질 포뮬러를 확보하는 것이 더욱 중요합니다.<br/><br/>
+          참고: Praxis의 각 배치는 정체성, 순도, 구성을 테스트하므로 라벨에 있는 내용이 캡슐에 들어있는 내용과 일치함을 확신할 수 있습니다. 또한 중금속, 미생물 및 주요 알레르기 유발 물질에 대한 규정 및 지침을 준수하는지 확인하고 제품의 품질과 안전을 보장하기 위해 제3자 테스트를 완료합니다.
+        </p>
+
+        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
+          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
+            <li>Wegh CAM, Geerlings SY, Knol J, Roeselers G, Belzer C. Postbiotics and Their Potential Applications in Early Life Nutrition and Beyond. Int J Mol Sci. 2019 Sep 20;20(19):4673.</li>
+            <li>Campos-Perez W, Martinez-Lopez E. Effects of short chain fatty acids on metabolic .... Biochim Biophys Acta Mol Cell Biol Lipids. 2021 Feb 9;1866(5):158900.</li>
+            <li>Robles Alonso V, Guarner F. Linking the gut microbiota to human health. Br J Nutr. 2013 Jan;109 Suppl 2:S21-6.</li>
+            <li>World Health Organization. Guidelines for the Evaluation of Probiotics in Food. Report of a Joint FAO/WHO Working Group on Drafting Guidelines for the Evaluation of Probiotics in Food. 2002.</li>
+            <li>Gibson GR, Roberfroid MB. Dietary modulation of the human colonic microbiota: introducing the concept of prebiotics. J Nutr. 1995 Jun;125(6):1401-12.</li>
+            <li>Carlson, J. L., Erickson, J. M., Lloyd, B. B., & Slavin, J. L. (2018). ...and Sources of Prebiotic Dietary Fiber. Current developments in nutrition, 2(3), nzy005.</li>
+            <li>MD, Toni Golen, and Hope Ricciotti MD. “What Are Postbiotics?” Harvard Health, 1 Nov. 2021.</li>
+          </ol>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'shelf-stability',
+    title: "유산균에도 유통기한이 있나요?",
+    category: "SHELF STABILITY",
+    image: "https://images.unsplash.com/photo-1506330682178-5c41e4439c37?auto=format&fit=crop&q=80&w=800",
+    readTime: "4 min read",
+    content: (
+      <div className="space-y-8">
+        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+            <li>프로바이오틱스는 살아있는 미생물이므로 시간이 지남에 따라 자연적으로 감소합니다.</li>
+            <li>제품 라벨의 균수는 '제조 시점'이 아닌 '유통기한 만료 시점'을 기준으로 보장되어야 합니다.</li>
+            <li>수분 제어 기술(CSP 용기 등)과 오버리지(Overage) 배합이 생존율의 핵심입니다.</li>
+          </ul>
+        </div>
+
+        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
+          찬장에 넣어둔 종합 비타민처럼 유산균도 영원히 효과가 지속될까요? 아쉽게도 그렇지 않습니다. 프로바이오틱스는 살아있는 생명체이기 때문에 수명이 존재하며, 유통기한이 지남에 따라 그 효력을 잃게 됩니다. 유산균의 생존과 유통기한에 대한 진실을 알아봅니다.
+        </p>
+        
+        <hr className="border-[#E0F2FE]" />
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">투입 균수 vs 보장 균수</h3>
+        <p className="text-slate-600 leading-loose">
+          많은 제품들이 "100억 마리 투입!"이라며 높은 숫자를 강조합니다. 하지만 소비자가 주목해야 할 것은 <strong>유통기한 끝까지 살아남는 균의 수(보장 균수)</strong>입니다. 제조 공장에서는 100억 마리를 넣었더라도, 유통 과정과 보관 기간을 거치며 균들이 죽어 나가, 막상 섭취할 때는 기대에 미치지 못할 수 있기 때문입니다.<br/><br/>
+          Trieb Praxis는 이를 방지하기 위해 <strong>오버리지(Overage)</strong> 기술을 적용합니다. 라벨에 표기된 110억 CFU(Colony Forming Units)를 보장하기 위해, 실제로는 제조 시점에 그보다 훨씬 많은 양을 투입하여 자연 감소분을 상쇄합니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">AFU: 새로운 측정 기준</h3>
+        <p className="text-slate-600 leading-loose">
+          일반적으로 유산균 수는 CFU(Colony Forming Units)로 측정합니다. 이는 실험실 배지에서 배양했을 때 군집을 형성하는 능력을 봅니다. 최근에는 형광 유세포 분석법을 이용한 AFU(Active Fluorescent Units)라는 새로운 단위도 등장했습니다. 하지만 여전히 전 세계적으로 통용되는 표준이자 임상 연구의 기준은 CFU입니다. Trieb는 가장 신뢰할 수 있는 CFU 단위를 기준으로 품질을 관리합니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">포장의 과학</h3>
+        <p className="text-slate-600 leading-loose">
+          유산균의 생명을 위협하는 가장 큰 적은 '수분'입니다. 동결 건조된 유산균은 수분을 만나면 잠에서 깨어나는데, 먹이가 없는 캡슐 안에서 깨어나면 곧 굶어 죽게 됩니다. 따라서 외부 습기를 완벽하게 차단하는 것이 중요합니다. Trieb는 일반적인 병이나 블리스터 포장 대신, 용기 내부에 흡습제가 내장된 특수 <strong>CSP 용기</strong>를 사용하여 마지막 한 캡슐까지 신선함을 유지합니다.
+        </p>
+
+        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
+          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
+            <li>Fenster K, et al. "The production and delivery of probiotics: A review of a practical approach." Microorganisms. 2019.</li>
+            <li>Tripathi MK, Giri SK. "Probiotic functional foods: Survival of probiotics during processing and storage." Journal of Functional Foods. 2014.</li>
+            <li>Council for Responsible Nutrition. "Best Practices for Probiotics." 2017.</li>
+          </ol>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'selection',
+    title: "최적의 프로바이오틱스를 선택하는 방법",
+    category: "GUIDE",
+    image: "https://images.unsplash.com/photo-1550577624-42f7424ed08b?auto=format&fit=crop&q=80&w=800",
+    readTime: "6 min read",
+    content: (
+      <div className="space-y-8">
+        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+            <li>단순히 균수(CFU)가 높은 것이 아니라, 임상적으로 검증된 '균주(Strain)'인지 확인해야 합니다.</li>
+            <li>위산에서 살아남아 장까지 도달할 수 있는 전달 기술(캡슐)이 중요합니다.</li>
+            <li>투명한 성분 공개(Traceability)와 제3자 기관 검증 여부를 따져보세요.</li>
+          </ul>
+        </div>
+
+        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
+          마트와 약국 진열대에는 수많은 유산균 제품이 있습니다. "100억 보장", "모유 유래", "17종 혼합" 등 화려한 문구들 사이에서, 과연 어떤 제품이 내 몸에 진짜 효과가 있을지 판단하기란 쉽지 않습니다. 과학적인 기준을 통해 옥석을 가려내는 방법을 알려드립니다.
+        </p>
+
+        <hr className="border-[#E0F2FE]" />
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">1. 균주(Strain)의 명확성</h3>
+        <p className="text-slate-600 leading-loose">
+          프로바이오틱스를 선택할 때 가장 중요한 것은 성분표를 읽는 법입니다. 단순히 <em>Lactobacillus acidophilus</em>(종, Species)라고만 적혀 있다면 충분하지 않습니다. 중요한 것은 그 뒤에 붙는 <strong>균주(Strain)</strong> 명입니다.<br/><br/>
+          예를 들어 <em>Lactobacillus rhamnosus</em> <strong>GG</strong>, <em>Bifidobacterium animalis subsp. lactis</em> <strong>BB-12</strong> 처럼 끝까지 명시되어 있어야 합니다. 임상 연구는 '종'이 아닌 특정 '균주'를 대상으로 진행되기 때문입니다. 같은 종이라도 균주에 따라 효능은 천지차이입니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">2. 생존력과 전달 시스템</h3>
+        <p className="text-slate-600 leading-loose">
+          좋은 균을 섭취하더라도 위에서 다 죽어버리면 소용이 없습니다. 위산은 pH 1.5~3.5의 강한 산성으로, 대부분의 세균을 살균합니다. 따라서 유산균이 위를 안전하게 통과하여 소장과 대장까지 도달할 수 있도록 하는 기술이 필수적입니다.<br/><br/>
+          Trieb Praxis는 <strong>지연 방출형 캡슐(Delayed-Release Capsule)</strong> 기술을 사용합니다. 이 캡슐은 산성 환경인 위에서는 녹지 않고, pH가 중성에 가까워지는 소장에 도달해서야 붕해되도록 설계되었습니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">3. 시너지 배합 (Synbiotics)</h3>
+        <p className="text-slate-600 leading-loose">
+          유산균(Probiotics)만 단독으로 섭취하는 것보다, 그들의 먹이가 되는 프리바이오틱스(Prebiotics)가 함께 배합된 <strong>신바이오틱스(Synbiotics)</strong> 제품을 선택하세요. 먹이가 함께 공급될 때 유산균의 생존율과 증식률이 비약적으로 높아지기 때문입니다.
+        </p>
+
+        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
+          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
+            <li>Hill C, et al. "The International Scientific Association for Probiotics and Prebiotics consensus statement on the scope and appropriate use of the term probiotic." Nat Rev Gastroenterol Hepatol. 2014.</li>
+            <li>McFarland LV, et al. "Strain-specificity and disease-specificity of probiotic efficacy: A systematic review and meta-analysis." Frontiers in Medicine. 2018.</li>
+          </ol>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'timing',
+    title: "유산균, 언제 섭취하는 것이 가장 좋을까요?",
+    category: "ROUTINE",
+    image: "https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&q=80&w=800",
+    readTime: "3 min read",
+    content: (
+      <div className="space-y-8">
+        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+            <li>일반적인 유산균은 위산이 희석된 '식사 중'이나 '식후' 섭취가 권장됩니다.</li>
+            <li>지연 방출형 캡슐 기술이 적용된 제품은 식전/식후 관계없이 섭취 가능합니다.</li>
+            <li>가장 중요한 것은 '시간대'보다 '매일 꾸준히' 먹는 습관입니다.</li>
+          </ul>
+        </div>
+
+        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
+          아침 공복에 물 한 잔과 함께? 아니면 저녁 식사 후에? 유산균 섭취 시간에 대한 의견은 분분합니다. 어떤 것이 과학적으로 옳은 방법일까요? 결론부터 말하자면, 제품의 기술력에 따라 정답은 달라집니다.
+        </p>
+
+        <hr className="border-[#E0F2FE]" />
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">위산의 공격을 피하라</h3>
+        <p className="text-slate-600 leading-loose">
+          프로바이오틱스 섭취의 최대 난관은 '위산'입니다. 공복 상태의 위 내부는 pH 2 이하의 강한 산성을 띱니다. 반면 식사를 하면 음식물이 위산을 중화시켜 pH가 일시적으로 상승합니다. 따라서 보호 코팅이 없는 일반적인 1세대 유산균이나 요거트라면, 위산의 공격이 덜한 <strong>식사 도중이나 식사 직후</strong>에 먹는 것이 생존율을 높이는 방법입니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">기술이 만드는 자유</h3>
+        <p className="text-slate-600 leading-loose">
+          하지만 현대의 기술은 이러한 제약을 극복했습니다. Trieb Praxis에 적용된 <strong>지연 방출형 캡슐(Delayed-Release Capsule)</strong>은 위산의 산도에서는 녹지 않고 견디다가, 소장에 도달했을 때 비로소 붕해되도록 설계되었습니다.<br/><br/>
+          이러한 기술이 적용된 제품이라면 공복이든 식후든 상관없습니다. 아침에 일어나서 양치 후 먹거나, 점심 식사 전 챙겨 먹는 등 여러분의 라이프스타일에 가장 편한 시간을 선택하면 됩니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">일관성의 힘</h3>
+        <p className="text-slate-600 leading-loose">
+          장내 미생물 생태계는 하루아침에 바뀌지 않습니다. 유익균이 정착하고 군락을 형성하기 위해서는 지속적인 공급이 필수적입니다. 따라서 가장 좋은 섭취 시간은 <strong>'여러분이 까먹지 않고 매일 챙길 수 있는 시간'</strong>입니다. 침대 머리맡이나 정수기 옆 등 눈에 잘 띄는 곳에 두고 매일의 루틴으로 만드세요.
+        </p>
+
+        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
+          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
+            <li>Tompkins TA, et al. "The impact of meals on a probiotic during transit through a model of the human upper gastrointestinal tract." Beneficial Microbes. 2011.</li>
+            <li>Bezkorovainy A. "Probiotics: determinants of survival and growth in the gut." Am J Clin Nutr. 2001.</li>
+          </ol>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'definition',
+    title: "프로바이오틱스란 무엇인가요?",
+    category: "EDUCATION",
+    image: "https://images.unsplash.com/photo-1579684385180-1ea55f61d2d2?auto=format&fit=crop&q=80&w=800",
+    readTime: "5 min read",
+    content: (
+      <div className="space-y-8">
+        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+            <li>프로바이오틱스는 적정량 섭취 시 숙주(사람)에게 건강상 이익을 주는 살아있는 미생물입니다.</li>
+            <li>단순히 발효 식품에 들어있는 균이라고 해서 모두 프로바이오틱스는 아닙니다.</li>
+            <li>이들은 소화기 건강, 면역 지원, 영양소 합성 등 다양한 역할을 수행합니다.</li>
+          </ul>
+        </div>
+
+        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
+          요거트, 콤부차, 김치, 그리고 캡슐 영양제까지. '프로바이오틱스'라는 단어는 우리 주변 어디에나 있습니다. 하지만 정확히 무엇을 의미하며, 우리 몸에서 어떤 역할을 할까요? 과학적 정의부터 역사까지, 프로바이오틱스의 모든 것을 파헤쳐 봅니다.
+        </p>
+
+        <hr className="border-[#E0F2FE]" />
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">과학적 정의</h3>
+        <p className="text-slate-600 leading-loose">
+          2001년, 세계보건기구(WHO)와 국제식량농업기구(FAO)는 프로바이오틱스를 다음과 같이 정의했습니다:<br/>
+          <strong>"적당량을 섭취했을 때 숙주의 건강에 유익한 작용을 하는 살아있는 미생물."</strong><br/><br/>
+          이 정의에는 중요한 조건이 포함되어 있습니다. 1) 살아있어야 하고, 2) 충분한 양이어야 하며, 3) 과학적으로 입증된 건강상의 이점이 있어야 한다는 점입니다. 즉, 모든 유산균이 프로바이오틱스는 아닙니다. 임상 연구를 통해 그 효능이 검증된 균주만이 그 자격을 얻습니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">식품 vs 보충제</h3>
+        <p className="text-slate-600 leading-loose">
+          김치나 사워크라우트 같은 발효 식품에도 유익균이 풍부합니다. 하지만 이러한 식품 속 균들은 종류와 양을 정확히 알기 어렵고, 위산에 의해 쉽게 사멸될 수 있습니다. 반면 건강기능식품으로 만들어진 프로바이오틱스는 특정 균주를 선별하여 배양하고, 캡슐 기술 등으로 보호하여 장까지 도달할 수 있도록 설계된 '정밀한 도구'입니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">우리 몸의 수호자</h3>
+        <p className="text-slate-600 leading-loose">
+          우리 장에는 수조 마리의 미생물이 살고 있는 거대한 생태계(마이크로바이옴)가 있습니다. 프로바이오틱스는 이 생태계의 균형을 맞추는 평화 유지군입니다. 유해균의 증식을 억제하고, 장벽을 튼튼하게 하여 나쁜 물질이 몸속으로 들어오는 것을 막으며, 면역 시스템을 훈련시킵니다.
+        </p>
+
+        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
+          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
+            <li>FAO/WHO. "Health and Nutritional Properties of Probiotics in Food including Powder Milk with Live Lactic Acid Bacteria." 2001.</li>
+            <li>Hill C, et al. "The International Scientific Association for Probiotics and Prebiotics consensus statement on the scope and appropriate use of the term probiotic." Nat Rev Gastroenterol Hepatol. 2014.</li>
+          </ol>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'pre-vs-pro',
+    title: "프리바이오틱스 vs 프로바이오틱스: 차이점이 무엇인가요?",
+    category: "COMPARISON",
+    image: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&q=80&w=800",
+    readTime: "4 min read",
+    content: (
+      <div className="space-y-8">
+        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+            <li>프로바이오틱스는 '유익균(씨앗)', 프리바이오틱스는 '유익균의 먹이(비료)'입니다.</li>
+            <li>프리바이오틱스는 소화되지 않고 장까지 내려가 유익균의 성장을 돕습니다.</li>
+            <li>이 둘을 함께 섭취하는 것을 '신바이오틱스(Synbiotics)'라고 합니다.</li>
+          </ul>
+        </div>
+
+        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
+          건강기능식품 코너에서 '프리(Pre)'와 '프로(Pro)'라는 단어를 보고 헷갈린 적이 있으신가요? 글자 하나 차이지만 그 역할은 하늘과 땅 차이입니다. 정원을 가꾸는 것에 비유하여 이 둘의 관계를 명쾌하게 설명해 드립니다.
+        </p>
+
+        <hr className="border-[#E0F2FE]" />
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">프로바이오틱스: 씨앗 (The Seed)</h3>
+        <p className="text-slate-600 leading-loose">
+          <strong>프로바이오틱스(Probiotics)</strong>는 살아있는 유익한 박테리아 자체를 말합니다. 황무지가 된 장이라는 토양에 심는 '씨앗'이라고 생각하면 됩니다. 락토바실러스나 비피도박테리움 등이 대표적이며, 이들이 장에 정착하여 군락을 이루는 것이 목표입니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">프리바이오틱스: 비료 (The Fertilizer)</h3>
+        <p className="text-slate-600 leading-loose">
+          <strong>프리바이오틱스(Prebiotics)</strong>는 우리 몸의 효소로는 소화되지 않는 식이섬유나 성분을 말합니다. 소화되지 않고 대장까지 내려간 이 성분들은 그곳에 살고 있는 유익균들의 훌륭한 '먹이'가 됩니다.<br/><br/>
+          아무리 좋은 씨앗(프로바이오틱스)을 심어도, 영양분(프리바이오틱스)이 없으면 싹을 틔우고 자랄 수 없습니다. 프리바이오틱스는 유익균의 증식을 돕고 활동성을 높이는 비료 역할을 합니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">신바이오틱스: 완벽한 콤비</h3>
+        <p className="text-slate-600 leading-loose">
+          따라서 이 둘은 떼려야 뗄 수 없는 관계입니다. 프로바이오틱스와 프리바이오틱스를 함께 배합한 제품을 <strong>신바이오틱스(Synbiotics)</strong>라고 부릅니다. Trieb Praxis는 여기에 유산균의 대사산물인 포스트바이오틱스까지 더하여, 씨앗과 비료, 그리고 수확물까지 한 번에 제공하는 차세대 솔루션입니다.
+        </p>
+
+        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
+          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
+            <li>Gibson GR, et al. "Expert consensus document: The International Scientific Association for Probiotics and Prebiotics (ISAPP) consensus statement on the definition and scope of prebiotics." Nat Rev Gastroenterol Hepatol. 2017.</li>
+            <li>Pandey KR, et al. "Probiotics, prebiotics, and synbiotics- a review." J Food Sci Technol. 2015.</li>
+          </ol>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'mechanism',
+    title: "프로바이오틱스는 어떻게 작용하나요?",
+    category: "MECHANISM",
+    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&q=80&w=800",
+    readTime: "5 min read",
+    content: (
+      <div className="space-y-8">
+        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+            <li>유익균은 장내에서 유해균과 경쟁하여 그들의 성장을 억제합니다(경쟁적 배제).</li>
+            <li>장 점막을 튼튼하게 하여 유해 물질이 침투하지 못하도록 방어벽을 강화합니다.</li>
+            <li>면역 세포와 상호 작용하여 과도한 면역 반응을 조절하고 전반적인 면역력을 지원합니다.</li>
+          </ul>
+        </div>
+
+        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
+          눈에 보이지 않는 미세한 박테리아가 어떻게 소화 불량부터 피부 트러블, 심지어 기분까지 영향을 미칠까요? 프로바이오틱스가 우리 몸속에서 수행하는 세 가지 주요 작용 메커니즘을 알아봅니다.
+        </p>
+
+        <hr className="border-[#E0F2FE]" />
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">1. 경쟁적 배제 (영토 전쟁)</h3>
+        <p className="text-slate-600 leading-loose">
+          장은 한정된 공간이고 영양분도 제한적입니다. 유익균이 장벽에 먼저 자리를 잡고 먹이를 선점하면, 병원성 박테리아(유해균)는 설 곳을 잃고 굶주리게 됩니다. 이를 '경쟁적 배제(Competitive Exclusion)'라고 합니다. 또한 유산균은 젖산(Lactic acid)을 분비하여 장내 환경을 산성으로 만드는데, 대부분의 유해균은 산성 환경에서 생존하기 어렵습니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">2. 장벽 강화 (성벽 보수)</h3>
+        <p className="text-slate-600 leading-loose">
+          우리의 장 점막은 외부의 독소와 병원균이 혈류로 들어오지 못하게 막는 1차 방어선입니다. 유익균은 장 상피세포 사이의 결합(Tight Junction)을 단단하게 유지하도록 돕고, 점액 분비를 촉진하여 물리적인 방어벽을 강화합니다. 이는 흔히 말하는 '장 누수 증후군'을 예방하는 데 중요한 역할을 합니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">3. 면역 조절 (지휘관 역할)</h3>
+        <p className="text-slate-600 leading-loose">
+          인체 면역 세포의 70% 이상이 장에 집중되어 있다는 사실을 아시나요? 장내 미생물은 장 점막 아래의 면역 세포들과 끊임없이 신호를 주고받습니다. 유익균은 면역 세포가 바이러스에 대항하도록 훈련시키기도 하고, 반대로 알레르기나 염증 같은 과도한 면역 반응은 진정시키는 지휘관(Regulator) 역할을 수행합니다.
+        </p>
+
+        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
+          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
+            <li>Plaza-Diaz J, et al. "Mechanisms of Action of Probiotics." Advances in Nutrition. 2019.</li>
+            <li>Bermudez-Brito M, et al. "Probiotic mechanisms of action." Annals of Nutrition and Metabolism. 2012.</li>
+          </ol>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'signs',
+    title: "유산균이 효과가 있다는 신호들",
+    category: "RESULTS",
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800",
+    readTime: "4 min read",
+    content: (
+      <div className="space-y-8">
+        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+            <li>섭취 초기(첫 주)에는 가스가 차거나 배가 꾸르륵거리는 일시적인 적응 증상이 나타날 수 있습니다.</li>
+            <li>몇 주가 지나면 배변 활동이 규칙적으로 변하고 속이 편안해집니다.</li>
+            <li>장기적으로는 피부 개선, 활력 증진 등 전신적인 건강 혜택을 경험할 수 있습니다.</li>
+          </ul>
+        </div>
+
+        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
+          유산균 섭취를 시작했는데 아무런 변화가 없거나, 오히려 배에 가스가 차서 당황스러우신가요? 걱정하지 마세요. 장내 환경이 재건축되는 과정에서 일어나는 자연스러운 반응일 수 있습니다. 시간의 흐름에 따라 나타나는 몸의 변화를 미리 알아두세요.
+        </p>
+
+        <hr className="border-[#E0F2FE]" />
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">1단계: 적응기 (1~7일)</h3>
+        <p className="text-slate-600 leading-loose">
+          새로운 유익균이 투입되어 기존의 미생물들과 경쟁하고 자리를 잡는 시기입니다. 이 과정에서 발효 활동이 활발해지며 일시적으로 가스가 차거나, 복부 팽만감, 가벼운 배변 변화(묽은 변 등)가 나타날 수 있습니다. 이를 흔히 '명현 현상'이라고 부르며, 보통 일주일 이내에 자연스럽게 사라집니다. 만약 불편함이 심하다면 섭취를 격일로 줄였다가 서서히 늘려보세요.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">2단계: 안정기 (2~4주)</h3>
+        <p className="text-slate-600 leading-loose">
+          유익균이 자리를 잡고 장내 환경이 안정화되는 시기입니다. 가장 먼저 느끼는 변화는 <strong>규칙적인 배변</strong>입니다. 변비나 설사가 줄어들고, 변의 형태가 바나나 모양처럼 건강해집니다. 식사 후 더부룩함이 줄어들고 속이 한결 가볍고 편안해지는 것을 느낄 수 있습니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">3단계: 변화기 (1개월 이상)</h3>
+        <p className="text-slate-600 leading-loose">
+          장 건강이 전신 건강으로 이어지는 단계입니다. 장내 독소가 줄어들면서 피부가 맑아지거나 트러블이 완화될 수 있습니다. 영양소 흡수율이 좋아져 활력이 생기고, 면역력이 균형을 잡으면서 환절기 건강 관리에 도움이 됩니다. 어떤 분들은 기분이 좋아지거나 수면의 질이 개선되는 것을 경험하기도 합니다(장-뇌 축 이론). 꾸준함이 가져다주는 진짜 선물입니다.
+        </p>
+
+        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
+          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
+            <li>Williams NT. "Probiotics." American Journal of Health-System Pharmacy. 2010.</li>
+            <li>Zhang H, et al. "Impact of Probiotics on Gut Health: Clinical Evidence." International Journal of Molecular Sciences. 2018.</li>
+          </ol>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'storage',
+    title: "유산균, 반드시 냉장 보관해야 할까요?",
+    category: "STORAGE",
+    image: "https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&q=80&w=800",
+    readTime: "3 min read",
+    content: (
+      <div className="space-y-8">
+        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+            <li>모든 유산균이 냉장 보관을 필요로 하는 것은 아닙니다. 기술 발전에 따라 실온 보관 제품이 늘어나고 있습니다.</li>
+            <li>유산균의 가장 큰 적은 온도보다 '수분'입니다.</li>
+            <li>동결 건조 기술과 특수 건조 용기(CSP)는 실온에서도 유산균의 생존을 보장합니다.</li>
+          </ul>
+        </div>
+
+        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
+          "생균이니까 당연히 냉장고에 넣어야지." 많은 분들이 이렇게 생각합니다. 과거에는 이것이 정답이었습니다. 하지만 유산균 보관의 상식도 과학 기술의 발전과 함께 변화하고 있습니다. 이제는 실온에 두고 먹어도 괜찮습니다. 그 이유를 알아볼까요?
+        </p>
+
+        <hr className="border-[#E0F2FE]" />
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">동결 건조: 시간을 멈추는 기술</h3>
+        <p className="text-slate-600 leading-loose">
+          초기의 액상 발효유나 1세대 유산균들은 열에 매우 취약했습니다. 하지만 현대의 고품질 프로바이오틱스는 <strong>동결 건조(Freeze-drying)</strong> 공정을 거칩니다. 균을 급속 동결시킨 후 수분을 제거하여 일종의 '가사 상태(Dormant state)'로 만드는 것입니다. 이렇게 잠든 유산균은 대사 활동을 멈추기 때문에 실온에서도 생명력을 유지할 수 있습니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">진짜 적은 '열'이 아니라 '습기'</h3>
+        <p className="text-slate-600 leading-loose">
+          실온 보관 시 가장 주의해야 할 것은 온도가 아니라 <strong>습기(Moisture)</strong>입니다. 미세한 수분이라도 침투하면 동결 건조된 유산균이 잠에서 깨어나게 됩니다. 먹이가 없는 캡슐 안에서 깨어난 유산균은 곧 굶어 죽게 되죠.<br/><br/>
+          Trieb Praxis는 이 문제를 해결하기 위해 <strong>CSP(Active Scavenging Polymer)</strong> 용기를 사용합니다. 용기 벽면 자체가 강력한 흡습제 역할을 하도록 설계되어 있어, 뚜껑을 여닫을 때 들어가는 미세한 수분까지 즉각적으로 제거합니다. 덕분에 냉장고 밖에서도 마지막 한 알까지 신선함을 유지합니다.
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">눈에 보여야 챙겨 먹는다</h3>
+        <p className="text-slate-600 leading-loose">
+          냉장 보관이 필수라면 여행 갈 때 챙겨가기 어렵고, 냉장고 깊숙이 넣어두면 깜빡 잊기 쉽습니다. Trieb Praxis는 직사광선을 피해 서늘한 곳이라면 어디든 보관 가능합니다. 식탁 위, 정수기 옆, 사무실 책상 등 눈에 잘 띄는 곳에 두세요. 유산균의 효과를 보는 가장 확실한 방법은 '매일 꾸준히' 먹는 것이니까요.
+        </p>
+
+        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
+          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
+            <li>Broeckx G, et al. "Drying techniques of probiotic bacteria as an important step towards the development of novel pharmaceutic products." Int J Pharm. 2016.</li>
+            <li>Champagne CP, et al. "Challenges in the addition of probiotic cultures to foods." Crit Rev Food Sci Nutr. 2005.</li>
+          </ol>
+        </div>
+      </div>
+    )
+  }
+];
+
+const MarqueeBanner = ({ onClick }: { onClick: () => void }) => (
+  <div 
+    onClick={onClick}
+    className="bg-[#0047AB] text-white py-2 text-[10px] font-bold uppercase tracking-[0.2em] overflow-hidden whitespace-nowrap relative z-[110] cursor-pointer hover:bg-blue-800 transition-colors"
+  >
     <motion.div
       animate={{ x: ["0%", "-50%"] }}
       transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
       className="inline-block"
     >
-      <span className="mx-8">첫 주문 한정: PRAXIS 25% 할인 혜택 <Timer className="w-3 h-3 inline ml-1" /></span>
+      <span className="mx-8">첫 주문 한정: PRAXIS 52% 할인 혜택 <Timer className="w-3 h-3 inline ml-1" /></span>
       <span className="mx-8">임상 연구 완료 성분 사용 <CheckCircle className="w-3 h-3 inline ml-1" /></span>
-      <span className="mx-8">첫 주문 한정: PRAXIS 25% 할인 혜택 <Timer className="w-3 h-3 inline ml-1" /></span>
+      <span className="mx-8">첫 주문 한정: PRAXIS 52% 할인 혜택 <Timer className="w-3 h-3 inline ml-1" /></span>
       <span className="mx-8">임상 연구 완료 성분 사용 <CheckCircle className="w-3 h-3 inline ml-1" /></span>
     </motion.div>
   </div>
 );
 
-const Nav = ({ onOpenCart, cartCount }: { onOpenCart: () => void, cartCount: number }) => (
+const Nav = ({ onOpenCart, cartCount, onBannerClick, onMenuClick, onNavigateHome, onNavigateScience }: { onOpenCart: () => void, cartCount: number, onBannerClick: () => void, onMenuClick: () => void, onNavigateHome: () => void, onNavigateScience: () => void }) => (
   <nav className="fixed top-0 left-0 right-0 z-[100]">
-    <MarqueeBanner />
+    <MarqueeBanner onClick={onBannerClick} />
     <div className="h-16 bg-white/80 backdrop-blur-lg border-b border-[#E0F2FE] px-6 md:px-12 flex items-center justify-between">
       <div className="flex-1 hidden md:flex gap-8">
-         <a href="#" className="text-xs font-bold text-[#0047AB] uppercase tracking-widest hover:text-blue-400">쇼핑</a>
-         <a href="#" className="text-xs font-bold text-[#0047AB] uppercase tracking-widest hover:text-blue-400">과학</a>
+         <button onClick={onNavigateHome} className="text-xs font-bold text-[#0047AB] uppercase tracking-widest hover:text-blue-400">쇼핑</button>
+         <button onClick={onNavigateScience} className="text-xs font-bold text-[#0047AB] uppercase tracking-widest hover:text-blue-400">과학</button>
       </div>
       <div className="md:hidden">
-        <button className="p-2 hover:bg-[#F0F7FF] rounded-full transition-colors"><Menu className="w-5 h-5 text-[#0047AB]" /></button>
+        <button onClick={onMenuClick} className="p-2 hover:bg-[#F0F7FF] rounded-full transition-colors"><Menu className="w-5 h-5 text-[#0047AB]" /></button>
       </div>
-      <div className="text-2xl font-black tracking-tighter text-[#0047AB] absolute left-1/2 -translate-x-1/2">TRIEB</div>
+      <div onClick={onNavigateHome} className="text-2xl font-black tracking-tighter text-[#0047AB] absolute left-1/2 -translate-x-1/2 cursor-pointer">TRIEB</div>
       <div className="flex-1 flex justify-end items-center gap-6">
         <a href="#" className="hidden md:block text-xs font-bold text-[#0047AB] uppercase tracking-widest hover:text-blue-400">브랜드 소개</a>
         <div className="flex items-center gap-4">
@@ -63,22 +565,148 @@ const Nav = ({ onOpenCart, cartCount }: { onOpenCart: () => void, cartCount: num
   </nav>
 );
 
+const MobileMenu = ({ isOpen, onClose, onShop, onScience }: { isOpen: boolean, onClose: () => void, onShop: () => void, onScience: () => void }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div 
+          initial={{ x: '-100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '-100%' }}
+          transition={{ type: "spring", damping: 30, stiffness: 300 }}
+          className="fixed inset-0 z-[300] bg-white px-6 py-4 flex flex-col"
+        >
+          <div className="flex items-center justify-between mb-16">
+             <div className="text-2xl font-black tracking-tighter text-[#0047AB]">TRIEB</div>
+             <button onClick={onClose} className="p-2 -mr-2 text-slate-400 hover:text-[#0047AB]">
+               <X className="w-6 h-6" />
+             </button>
+          </div>
+          
+          <nav className="flex flex-col gap-10">
+            <button onClick={onShop} className="text-left group">
+               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2 block group-hover:text-[#0047AB] transition-colors">Collection</span>
+               <span className="text-4xl font-bold text-[#0047AB] serif-italic leading-none group-hover:pl-4 transition-all duration-300">Shop Praxis</span>
+            </button>
+            
+            <button onClick={onScience} className="text-left group">
+               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2 block group-hover:text-[#0047AB] transition-colors">Research</span>
+               <span className="text-4xl font-bold text-[#0047AB] serif-italic leading-none group-hover:pl-4 transition-all duration-300">Science</span>
+            </button>
+          </nav>
+          
+          <div className="mt-auto mb-8 space-y-4">
+             <div className="w-full h-[1px] bg-[#E0F2FE]" />
+             <div className="flex gap-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+               <a href="#">Log In</a>
+               <a href="#">Account</a>
+             </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+const ArticleDetail = ({ article, onBack }: { article: ArticleData, onBack: () => void }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      exit={{ opacity: 0 }}
+      className="pt-24 pb-20 px-6 max-w-screen-lg mx-auto min-h-screen"
+    >
+      <button 
+        onClick={onBack}
+        className="group flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-[#0047AB] transition-colors mb-12"
+      >
+        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+        Back to Science
+      </button>
+
+      <div className="mb-12">
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-4 block">{article.category}</span>
+        <h1 className="text-4xl md:text-6xl font-bold text-[#0047AB] serif-italic mb-6 leading-tight">{article.title}</h1>
+        <div className="flex items-center gap-6 text-xs font-bold text-slate-400 uppercase tracking-widest">
+          <span className="flex items-center gap-2"><Clock className="w-4 h-4" /> {article.readTime}</span>
+          <span className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Trieb Research</span>
+        </div>
+      </div>
+
+      <div className="w-full aspect-[21/9] bg-slate-100 rounded-[2rem] overflow-hidden mb-16 shadow-lg">
+        <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+      </div>
+
+      <div className="max-w-2xl mx-auto">
+        <div className="prose prose-lg prose-slate prose-headings:font-bold prose-headings:text-[#0047AB] prose-p:text-slate-600 prose-p:leading-8 mb-20">
+          {article.content}
+        </div>
+        
+        <div className="border-t border-[#E0F2FE] pt-12 flex justify-between items-center">
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Share this article</p>
+          <div className="flex gap-4">
+             <button className="p-3 rounded-full bg-[#F0F7FF] text-[#0047AB] hover:bg-[#0047AB] hover:text-white transition-colors">
+               <Share2 className="w-5 h-5" />
+             </button>
+             <button className="p-3 rounded-full bg-[#F0F7FF] text-[#0047AB] hover:bg-[#0047AB] hover:text-white transition-colors">
+               <Copy className="w-5 h-5" />
+             </button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const SciencePage = ({ onArticleSelect }: { onArticleSelect: (article: ArticleData) => void }) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      exit={{ opacity: 0 }}
+      className="pt-32 pb-20 px-6 max-w-screen-xl mx-auto min-h-screen"
+    >
+      <div className="mb-20 text-center md:text-left">
+        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-4 block">Trieb Research</span>
+        <h1 className="text-5xl md:text-8xl font-bold text-[#0047AB] serif-italic mb-6">Science</h1>
+        <p className="text-lg text-slate-600 max-w-2xl font-medium leading-relaxed">
+          투명한 연구, 입증된 결과. Trieb의 모든 제품은 철저한 과학적 검증을 거칩니다.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+        {ARTICLES_DATA.map((item) => (
+          <div key={item.id} onClick={() => onArticleSelect(item)} className="group cursor-pointer">
+            <div className="aspect-[4/3] bg-[#F0F7FF] rounded-2xl overflow-hidden mb-6 relative">
+               <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+               <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest text-[#0047AB]">
+                 {item.category}
+               </div>
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 leading-tight group-hover:text-[#0047AB] transition-colors mb-2">
+              {item.title}
+            </h3>
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+              Read Article <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
 const Hero = ({ onAddToCart }: { onAddToCart: () => void }) => (
   <section className="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
     <div className="absolute inset-0 -z-20 bg-[linear-gradient(135deg,#E0F2FE_0%,#F0F9FF_100%)] opacity-100" />
-    
-    {/* Background Capsule Animation */}
     <div className="absolute inset-0 flex items-center justify-center -z-10 overflow-hidden pointer-events-none">
        <motion.div
-         animate={{ 
-            rotateY: [-15, 15, -15],
-            y: [-20, 20, -20]
-         }}
-         transition={{ 
-            duration: 8, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-         }}
+         animate={{ rotateY: [-15, 15, -15], y: [-20, 20, -20] }}
+         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
          className="w-[80vw] max-w-[500px] opacity-90 perspective-1000"
        >
          <img 
@@ -193,22 +821,6 @@ const RitualBenefits = () => {
           <BenefitItem title="유익균 성장 환경 조성" content="정밀 설계된 프리바이오틱스가 유해균의 성장을 억제하고 장내 유익균이 번성할 수 있는 최적의 환경을 조성합니다." delay={0.2} />
           <BenefitItem title="장벽 건강 강화" content="강력한 포스트바이오틱스 성분이 장벽 세포에 에너지를 공급하여 장 건강의 근본적인 방어력을 강화합니다." delay={0.3} />
           <BenefitItem title="기초 면역력 증진" content="면역 세포의 약 70%가 집중된 장을 케어함으로써 전반적인 신체 면역 시스템의 기초를 튼튼하게 다집니다." delay={0.4} />
-        </div>
-      </div>
-      
-      <div className="mt-32 border-y border-[#E0F2FE] py-12 px-6">
-        <div className="max-w-screen-xl mx-auto flex flex-wrap justify-center md:justify-between items-center gap-12">
-           {[
-             { label: '임상 연구 완료', icon: '🔬' },
-             { label: 'NON-GMO', icon: '🧬' },
-             { label: '비건 친화적', icon: '🌱' },
-             { label: '메이드 트레이서블', icon: '🗺️' }
-           ].map((item, idx) => (
-             <div key={idx} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                <span className="text-xl grayscale">{item.icon}</span>
-                {item.label}
-             </div>
-           ))}
         </div>
       </div>
     </section>
@@ -383,37 +995,17 @@ const ReviewsSection = () => {
   );
 };
 
-const WelcomePopup = ({ onClose, onNext }: { onClose: () => void, onNext: () => void }) => {
-  return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm">
-      <motion.div 
-        initial={{ scale: 0.9, opacity: 0, y: 20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="relative bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row"
-      >
-        <button onClick={onClose} className="absolute top-4 right-4 p-2 bg-white/80 hover:bg-white rounded-full transition-colors z-10 text-slate-400 hover:text-[#0047AB]"><X className="w-5 h-5" /></button>
-        <div className="md:w-1/2 bg-[#F0F7FF] relative min-h-[200px] flex items-center justify-center overflow-hidden p-10">
-          <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="relative z-0 w-24 h-40 border-4 border-[#E0F2FE] rounded-full bg-white shadow-xl flex items-center justify-center">
-            <div className="w-16 h-16 bg-[#E0F2FE] rounded-full blur-xl animate-pulse" />
-          </motion.div>
-        </div>
-        <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-4 block">Exclusive Membership</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0047AB] serif-italic leading-tight mb-6">첫 주문 <br/>25% 할인 받기</h2>
-          <p className="text-sm text-slate-500 font-medium leading-relaxed mb-8">트립 멤버십에 가입하고 첫 주문 25% 할인 코드와 장 건강을 위한 인사이트를 받아보세요.</p>
-          <div className="space-y-4">
-            <input type="tel" placeholder="휴대폰 번호" className="w-full px-6 py-4 rounded-full border border-[#E0F2FE] bg-[#F0F7FF] focus:outline-none focus:ring-2 focus:ring-blue-100 focus:bg-white transition-all text-sm font-medium" />
-            <button onClick={onNext} className="w-full bg-[#0047AB] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-2 hover:bg-blue-800 transition-colors shadow-lg">할인받기 <ArrowRight className="w-4 h-4" /></button>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
+interface BundleItemProps {
+  title: string;
+  discount: string;
+  originalPrice: number;
+  salePrice: number;
+  perBoxPrice: number;
+  image: string;
+  onClick?: () => void;
 }
 
-const BundleItem = ({ 
+const BundleItem: React.FC<BundleItemProps> = ({ 
   title, 
   discount, 
   originalPrice, 
@@ -421,14 +1013,6 @@ const BundleItem = ({
   perBoxPrice, 
   image, 
   onClick 
-}: { 
-  title: string; 
-  discount: string; 
-  originalPrice: number; 
-  salePrice: number; 
-  perBoxPrice: number; 
-  image: string; 
-  onClick?: () => void; 
 }) => (
   <button 
     onClick={onClick}
@@ -449,21 +1033,15 @@ const BundleItem = ({
         </div>
       </div>
       <div className="text-right flex flex-col justify-center gap-0.5">
-         <span className="text-[10px] text-slate-300 line-through font-medium">
-           ₩{originalPrice.toLocaleString()}
-         </span>
-         <span className="text-[10px] text-slate-400 font-bold">
-           ₩{salePrice.toLocaleString()}
-         </span>
+         <span className="text-[10px] text-slate-300 line-through font-medium">₩{originalPrice.toLocaleString()}</span>
+         <span className="text-[10px] text-slate-400 font-bold">₩{salePrice.toLocaleString()}</span>
       </div>
     </div>
     <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-[#0047AB] transition-colors shrink-0 ml-3" />
   </button>
 );
 
-const SelectionPopup = ({ onClose }: { onClose: () => void }) => {
-  const praxisImage = "https://images.ctfassets.net/u9fvvze9asat/5xXpW4YxToxXqX9GvWlEwz/a2a3e6c38b2e35c8b3c3b4a2d3e4b5c6/Synbiotic_Product.png";
-
+const SelectionPopup = ({ onClose, onAddBundle, onAddSingle }: { onClose: () => void, onAddBundle: (bundle: any) => void, onAddSingle: () => void }) => {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm">
       <motion.div 
@@ -474,47 +1052,103 @@ const SelectionPopup = ({ onClose }: { onClose: () => void }) => {
         className="relative bg-white w-full max-w-sm rounded-[2rem] overflow-hidden shadow-2xl p-8"
       >
         <button onClick={onClose} className="absolute top-6 right-6 p-2 hover:bg-[#F0F7FF] rounded-full transition-colors text-slate-400 hover:text-[#0047AB]"><X className="w-5 h-5" /></button>
-        
         <div className="text-center mt-4 mb-8">
            <h4 className="text-blue-600 font-bold uppercase tracking-widest text-[10px] mb-4">Exclusive Offer</h4>
            <h2 className="text-4xl text-[#0047AB] leading-tight mb-4">
-              <span className="serif-italic">Unlock 25%</span> <span className="serif-italic">off your</span> <br />
+              <span className="serif-italic">Unlock 52%</span> <span className="serif-italic">off your</span> <br />
               <span className="font-bold font-sans">new Trieb</span>
            </h2>
-           <p className="text-slate-500 text-sm font-medium leading-relaxed max-w-[240px] mx-auto">
-              Plus, get a free gut health guide ($50 value) on your first order.
-           </p>
+           <p className="text-slate-500 text-sm font-medium leading-relaxed max-w-[240px] mx-auto">Plus, get a free gut health guide ($50 value) on your first order.</p>
+        </div>
+        <div className="space-y-2 mb-4">
+           {BUNDLES.map(bundle => (
+             <BundleItem 
+               key={bundle.id}
+               title={bundle.name} 
+               discount={bundle.discount}
+               originalPrice={bundle.originalPrice}
+               salePrice={bundle.salePrice}
+               perBoxPrice={bundle.perBoxPrice}
+               image={bundle.image}
+               onClick={() => onAddBundle(bundle)}
+             />
+           ))}
+        </div>
+        <button 
+          onClick={onAddSingle}
+          className="w-full py-4 rounded-2xl border border-[#E0F2FE] bg-white text-slate-500 font-bold text-[11px] uppercase tracking-widest hover:bg-slate-50 hover:text-[#0047AB] transition-colors"
+        >
+          1박스만 구매하기 — ₩54,000
+        </button>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// New SoldOutPopup component with the Trieb aesthetic and a discount incentive
+const SoldOutPopup = ({ onClose }: { onClose: () => void }) => {
+  const [copied, setCopied] = useState(false);
+  const code = "TRIEB-WAIT-30";
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      exit={{ opacity: 0 }} 
+      className="fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm"
+    >
+      <motion.div 
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+        className="relative bg-white w-full max-w-sm rounded-[2.5rem] overflow-hidden shadow-2xl p-10 text-center"
+      >
+        <button onClick={onClose} className="absolute top-6 right-6 p-2 hover:bg-[#F0F7FF] rounded-full transition-colors text-slate-400 hover:text-[#0047AB]">
+          <X className="w-5 h-5" />
+        </button>
+        
+        <div className="flex justify-center mb-6">
+          <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center">
+            <AlertCircle className="w-8 h-8 text-[#0047AB]" />
+          </div>
         </div>
 
-        <div className="space-y-2">
-           <BundleItem 
-             title="Praxis 6+6" 
-             discount="52% OFF"
-             originalPrice={840000}
-             salePrice={410688}
-             perBoxPrice={33474}
-             image={praxisImage}
-             onClick={onClose}
-           />
-           <BundleItem 
-             title="Praxis 4+3" 
-             discount="47% OFF"
-             originalPrice={490000}
-             salePrice={262080}
-             perBoxPrice={37440}
-             image={praxisImage}
-             onClick={onClose}
-           />
-           <BundleItem 
-             title="Praxis 3+2" 
-             discount="26% OFF"
-             originalPrice={350000}
-             salePrice={258406}
-             perBoxPrice={51681}
-             image={praxisImage}
-             onClick={onClose}
-           />
+        <h2 className="text-3xl font-bold text-[#0047AB] serif-italic leading-tight mb-4">
+          Currently <br/> Sold Out
+        </h2>
+        <p className="text-sm text-slate-500 font-medium leading-relaxed mb-8">
+          죄송합니다. 예상보다 많은 주문으로 인해<br/> 준비된 수량이 모두 소진되었습니다.
+        </p>
+        
+        <div className="bg-[#F0F7FF] rounded-2xl p-6 mb-8 border border-[#E0F2FE]">
+          <p className="text-[10px] font-black uppercase tracking-widest text-blue-400 mb-3">Next Purchase Gift</p>
+          <p className="text-xs text-slate-600 font-bold mb-4">기다려주시는 분들을 위한<br/>30% 시크릿 할인 코드</p>
+          <div 
+            onClick={handleCopy}
+            className="flex items-center justify-between bg-white rounded-xl px-4 py-3 border border-blue-100 cursor-pointer hover:border-blue-300 transition-colors group"
+          >
+            <span className="font-mono font-bold text-[#0047AB] tracking-wider">{code}</span>
+            {copied ? (
+              <CheckCircle className="w-4 h-4 text-green-500" />
+            ) : (
+              <Copy className="w-4 h-4 text-slate-300 group-hover:text-[#0047AB] transition-colors" />
+            )}
+          </div>
         </div>
+
+        <button 
+          onClick={onClose}
+          className="w-full bg-[#0047AB] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-blue-800 transition-colors shadow-lg"
+        >
+          확인
+        </button>
       </motion.div>
     </motion.div>
   );
@@ -545,68 +1179,164 @@ const MobileStickyFooter = ({ onAddToCart }: { onAddToCart: () => void }) => {
 };
 
 const App: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentView, setCurrentView] = useState<'home' | 'science'>('home');
+  const [selectedArticle, setSelectedArticle] = useState<ArticleData | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [popupStage, setPopupStage] = useState<'none' | 'welcome' | 'selection'>('none');
-  const [cartItems, setCartItems] = useState<{ product: Product, qty: number }[]>([]);
+  const [popupStage, setPopupStage] = useState<'none' | 'welcome' | 'selection' | 'soldout'>('none');
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
     const timer = setTimeout(() => setPopupStage('welcome'), 1500);
     return () => clearTimeout(timer);
   }, []);
 
-  const addToCart = () => {
+  const handleShopNav = () => {
+    setCurrentView('home');
+    setSelectedArticle(null);
+    setIsMobileMenuOpen(false);
+    setPopupStage('selection');
+  };
+
+  const handleScienceNav = () => {
+    setCurrentView('science');
+    setSelectedArticle(null);
+    setIsMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
+  const handleNavigateHome = () => {
+    setCurrentView('home');
+    setSelectedArticle(null);
+    setIsMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const addBundleToCart = (bundle: any) => {
     setCartItems(prev => {
-      const existing = prev.find(i => i.product.id === PRAXIS_DATA.id);
-      if (existing) return prev.map(i => i.product.id === PRAXIS_DATA.id ? { ...i, qty: i.qty + 1 } : i);
-      return [...prev, { product: PRAXIS_DATA, qty: 1 }];
+      const existing = prev.find(i => i.id === bundle.id);
+      if (existing) return prev.map(i => i.id === bundle.id ? { ...i, qty: i.qty + 1 } : i);
+      return [...prev, { 
+        id: bundle.id, 
+        name: bundle.name, 
+        originalPrice: bundle.originalPrice, 
+        salePrice: bundle.salePrice, 
+        qty: 1, 
+        image: bundle.image 
+      }];
     });
+    setPopupStage('none');
     setIsCartOpen(true);
   };
 
-  const updateQty = (id: string, delta: number) => {
-    setCartItems(prev => prev.map(i => i.product.id === id ? { ...i, qty: Math.max(1, i.qty + delta) } : i));
+  const handleAddSingle = () => {
+    addBundleToCart({
+      id: 'single-box',
+      name: 'Praxis Synbiotics+',
+      originalPrice: 54000,
+      salePrice: 54000,
+      perBoxPrice: 54000,
+      discount: '',
+      image: "https://images.ctfassets.net/u9fvvze9asat/5xXpW4YxToxXqX9GvWlEwz/a2a3e6c38b2e35c8b3c3b4a2d3e4b5c6/Synbiotic_Product.png"
+    });
   };
+
+  const updateQty = (id: string, delta: number) => {
+    setCartItems(prev => prev.map(i => i.id === id ? { ...i, qty: Math.max(1, i.qty + delta) } : i));
+  };
+
+  const removeItem = (id: string) => {
+    setCartItems(prev => prev.filter(i => i.id !== id));
+  };
+
+  const handleCheckout = () => {
+    setIsCartOpen(false);
+    setPopupStage('soldout');
+  };
+
+  // Pricing calculations
+  const totalOriginal = cartItems.reduce((acc, i) => acc + (i.originalPrice * i.qty), 0);
+  const totalSale = cartItems.reduce((acc, i) => acc + (i.salePrice * i.qty), 0);
+  const totalDiscount = totalOriginal - totalSale;
 
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900 pb-24 md:pb-0">
-      <Nav onOpenCart={() => setIsCartOpen(true)} cartCount={cartItems.reduce((acc, i) => acc + i.qty, 0)} />
+      <Nav 
+        onOpenCart={() => setIsCartOpen(true)} 
+        cartCount={cartItems.reduce((acc, i) => acc + i.qty, 0)} 
+        onBannerClick={() => setPopupStage('welcome')} 
+        onMenuClick={() => setIsMobileMenuOpen(true)}
+        onNavigateHome={handleNavigateHome}
+        onNavigateScience={handleScienceNav}
+      />
       
-      <Hero onAddToCart={addToCart} />
+      <MobileMenu 
+        isOpen={isMobileMenuOpen} 
+        onClose={() => setIsMobileMenuOpen(false)} 
+        onShop={handleShopNav} 
+        onScience={handleScienceNav} 
+      />
+      
+      {currentView === 'home' && (
+        <>
+          <Hero onAddToCart={() => setPopupStage('selection')} />
+          <RitualBenefits />
+          <IngredientFacts />
+          <JournalSection />
+          <ReviewsSection />
+        </>
+      )}
 
-      {/* RotatingCapsule section removed as requested */}
-      
-      <RitualBenefits />
-      
-      <IngredientFacts />
+      {currentView === 'science' && !selectedArticle && (
+        <SciencePage onArticleSelect={(article) => setSelectedArticle(article)} />
+      )}
 
-      <JournalSection />
-      <ReviewsSection />
+      {currentView === 'science' && selectedArticle && (
+        <ArticleDetail article={selectedArticle} onBack={() => setSelectedArticle(null)} />
+      )}
       
       <footer className="py-32 px-6 bg-[#F0F7FF] border-t border-[#E0F2FE] text-center">
         <div className="text-3xl font-black text-[#0047AB] mb-10 tracking-tighter">TRIEB</div>
-        <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-12 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-          <span className="cursor-pointer hover:text-blue-600">개인정보처리방침</span>
-          <span className="cursor-pointer hover:text-blue-600">이용약관</span>
-          <span className="cursor-pointer hover:text-blue-600">인스타그램</span>
-          <span className="cursor-pointer hover:text-blue-600">과학적 근거</span>
-        </div>
         <p className="text-[10px] font-medium text-slate-300 uppercase tracking-widest leading-loose">
-          &copy; 2026 Trieb Ritual. Crafted for Excellence. <br className="md:hidden"/>
-          *These statements have not been evaluated by the FDA.
+          &copy; 2026 Trieb Ritual. Crafted for Excellence.
         </p>
       </footer>
 
-      <MobileStickyFooter onAddToCart={addToCart} />
+      <MobileStickyFooter onAddToCart={() => setPopupStage('selection')} />
 
       <AnimatePresence>
         {popupStage === 'welcome' && (
-          <WelcomePopup 
-            onClose={() => setPopupStage('none')} 
-            onNext={() => setPopupStage('selection')} 
-          />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }}
+              className="relative bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row"
+            >
+              <button onClick={() => setPopupStage('none')} className="absolute top-4 right-4 p-2 text-slate-400 z-10"><X className="w-5 h-5" /></button>
+              <div className="md:w-1/2 bg-[#F0F7FF] p-10 flex items-center justify-center relative">
+                 <div className="w-24 h-40 border-4 border-[#E0F2FE] rounded-full bg-white shadow-xl flex items-center justify-center">
+                    <div className="w-16 h-16 bg-[#E0F2FE] rounded-full blur-xl animate-pulse" />
+                 </div>
+              </div>
+              <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-4 block">Exclusive Membership</span>
+                <h2 className="text-4xl md:text-5xl font-bold text-[#0047AB] serif-italic leading-tight mb-6">첫 주문 <br/>52% 할인 받기</h2>
+                <p className="text-sm text-slate-500 font-medium leading-relaxed mb-8">트립 멤버십에 가입하고 첫 주문 52% 할인 코드와 장 건강을 위한 인사이트를 받아보세요.</p>
+                <div className="space-y-4">
+                  <input type="tel" placeholder="휴대폰 번호" className="w-full px-6 py-4 rounded-full border border-[#E0F2FE] bg-[#F0F7FF] focus:outline-none focus:ring-2 focus:ring-blue-100 focus:bg-white transition-all text-sm font-medium" />
+                  <button onClick={() => setPopupStage('selection')} className="w-full bg-[#0047AB] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-2 hover:bg-blue-800 transition-colors shadow-lg">할인받기 <ArrowRight className="w-4 h-4" /></button>
+                  <p className="text-[9px] text-slate-300 text-center mt-3 leading-tight">
+                    * <span className="underline cursor-pointer hover:text-slate-400 decoration-slate-200 underline-offset-2">개인정보 수집 및 이용</span>에 동의합니다.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
         {popupStage === 'selection' && (
-          <SelectionPopup onClose={() => setPopupStage('none')} />
+          <SelectionPopup onClose={() => setPopupStage('none')} onAddBundle={addBundleToCart} onAddSingle={handleAddSingle} />
+        )}
+        {popupStage === 'soldout' && (
+          <SoldOutPopup onClose={() => setPopupStage('none')} />
         )}
       </AnimatePresence>
 
@@ -614,41 +1344,75 @@ const App: React.FC = () => {
         {isCartOpen && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsCartOpen(false)} className="fixed inset-0 bg-slate-900/20 backdrop-blur-md z-[200]" />
-            <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }} className="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-[201] shadow-2xl flex flex-col p-8 md:p-10">
-              <div className="flex justify-between items-center mb-12">
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-[#0047AB]">쇼핑백</h2>
+            <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }} className="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-[201] shadow-2xl flex flex-col">
+              <div className="p-8 md:p-10 border-b border-[#E0F2FE] flex justify-between items-center bg-white sticky top-0 z-10">
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-[#0047AB]">쇼핑백 ({cartItems.length})</h2>
                 <button onClick={() => setIsCartOpen(false)} className="p-2 hover:bg-slate-50 rounded-full transition-colors"><X className="w-5 h-5 text-slate-400" /></button>
               </div>
-              <div className="flex-1 overflow-y-auto">
+              
+              <div className="flex-1 overflow-y-auto p-8 md:p-10 space-y-8">
                 {cartItems.length === 0 ? (
-                  <p className="text-center text-slate-400 text-sm mt-20 italic">쇼핑백이 비어 있습니다.</p>
+                  <div className="h-full flex flex-col items-center justify-center text-center">
+                    <ShoppingBag className="w-12 h-12 text-[#E0F2FE] mb-4" />
+                    <p className="text-slate-400 text-sm italic">쇼핑백이 비어 있습니다.</p>
+                  </div>
                 ) : (
                   cartItems.map(item => (
-                    <div key={item.product.id} className="flex gap-6 mb-8 pb-8 border-b border-[#E0F2FE]">
-                      <div className="w-20 h-24 bg-[#F0F7FF] rounded-xl flex items-center justify-center">
-                        <div className="w-8 h-12 border-2 border-[#E0F2FE] rounded-full bg-white shadow-sm" />
+                    <div key={item.id} className="flex gap-6 pb-8 border-b border-[#E0F2FE] group last:border-0">
+                      <div className="w-20 h-24 bg-[#F0F7FF] rounded-xl flex items-center justify-center shrink-0">
+                        <img src={item.image} className="w-12 object-contain mix-blend-multiply" />
                       </div>
                       <div className="flex-1 flex flex-col justify-center">
-                        <div className="flex justify-between font-bold text-sm mb-1 text-[#0047AB]"><span>{item.product.name}</span><span>₩{(item.product.price * item.qty).toLocaleString()}</span></div>
-                        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider italic mb-4">Praxis Synbiotics+</div>
-                        <div className="flex items-center gap-4">
-                           <button onClick={() => updateQty(item.product.id, -1)} className="p-1 border border-[#E0F2FE] rounded-md hover:bg-[#F0F7FF]"><Minus className="w-3 h-3 text-slate-400"/></button>
-                           <span className="text-xs font-bold text-slate-600">{item.qty}</span>
-                           <button onClick={() => updateQty(item.product.id, 1)} className="p-1 border border-[#E0F2FE] rounded-md hover:bg-[#F0F7FF]"><Plus className="w-3 h-3 text-slate-400"/></button>
+                        <div className="flex justify-between font-bold text-sm mb-1 text-[#0047AB]">
+                          <span>{item.name}</span>
+                          <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-400 transition-colors">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider italic mb-4">Gut Health</div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3 bg-[#F8FAFC] px-3 py-1.5 rounded-full border border-[#E0F2FE]">
+                             <button onClick={() => updateQty(item.id, -1)} className="text-slate-400 hover:text-[#0047AB]"><Minus className="w-3 h-3"/></button>
+                             <span className="text-xs font-bold text-slate-600 w-4 text-center">{item.qty}</span>
+                             <button onClick={() => updateQty(item.id, 1)} className="text-slate-400 hover:text-[#0047AB]"><Plus className="w-3 h-3"/></button>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-[10px] text-slate-300 line-through">₩{(item.originalPrice * item.qty).toLocaleString()}</p>
+                            <p className="font-black text-sm text-[#0047AB]">₩{(item.salePrice * item.qty).toLocaleString()}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   ))
                 )}
               </div>
+
               {cartItems.length > 0 && (
-                <div className="pt-8 bg-white">
-                  <div className="flex justify-between items-center mb-6 font-bold text-slate-600">
-                    <span className="text-xs uppercase tracking-widest">합계</span>
-                    <span className="text-lg">₩{cartItems.reduce((acc, i) => acc + i.product.price * i.qty, 0).toLocaleString()}</span>
+                <div className="p-8 md:p-10 bg-white border-t border-[#E0F2FE] shadow-[0_-15px_40px_rgba(0,0,0,0.05)]">
+                  <div className="space-y-3 mb-8">
+                    <div className="flex justify-between text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+                      <span>정상금액</span>
+                      <span>₩{totalOriginal.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-[11px] font-bold text-blue-500 uppercase tracking-widest">
+                      <span>할인금액</span>
+                      <span>- ₩{totalDiscount.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-[11px] font-bold text-slate-400 uppercase tracking-widest border-t border-[#F8FAFC] pt-3">
+                      <span>배송비</span>
+                      <span>무료</span>
+                    </div>
+                    <div className="flex justify-between items-center pt-2 font-black text-[#0047AB]">
+                      <span className="text-xs uppercase tracking-[0.2em]">결제금액</span>
+                      <span className="text-2xl tracking-tighter">₩{totalSale.toLocaleString()}</span>
+                    </div>
                   </div>
-                  <button className="w-full bg-[#0047AB] text-white py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[11px] hover:bg-blue-800 transition-colors shadow-lg">결제하기</button>
-                  <p className="text-center text-[9px] text-slate-300 mt-6 uppercase tracking-widest">Free Shipping on all orders</p>
+                  <button 
+                    onClick={handleCheckout} 
+                    className="w-full bg-[#0047AB] text-white py-5 rounded-full font-black uppercase tracking-[0.25em] text-[11px] hover:bg-blue-800 transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3"
+                  >
+                    주문하기 <ChevronRight className="w-4 h-4" />
+                  </button>
                 </div>
               )}
             </motion.div>
