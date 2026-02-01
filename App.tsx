@@ -124,49 +124,59 @@ const ARTICLES_DATA: ArticleData[] = [
   },
   {
     id: 'shelf-stability',
-    title: "유산균에도 유통기한이 있나요?",
+    title: "유산균에도 유통기한이 있나요? 전문가가 전하는 진실",
     category: "SHELF STABILITY",
     image: "https://images.unsplash.com/photo-1506330682178-5c41e4439c37?auto=format&fit=crop&q=80&w=800",
     readTime: "4 min read",
     content: (
       <div className="space-y-8">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
           <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>프로바이오틱스는 살아있는 미생물이므로 시간이 지남에 따라 자연적으로 감소합니다.</li>
-            <li>제품 라벨의 균수는 '제조 시점'이 아닌 '유통기한 만료 시점'을 기준으로 보장되어야 합니다.</li>
-            <li>수분 제어 기술(CSP 용기 등)과 오버리지(Overage) 배합이 생존율의 핵심입니다.</li>
+            <li>프로바이오틱스 영양제 속 살아있는 균에도 분명 유통기한은 존재합니다. 하지만 기한이 지난 후에는 언제까지 유효할까요?</li>
+            <li>유산균의 유통기한(Shelf Life)은 사용된 균주, 캡슐화 기술, 그리고 보관 환경에 따라 결정됩니다.</li>
+            <li>결론부터 말씀드리면, Trieb Praxis의 유통기한은 제조일로부터 약 1년입니다.</li>
           </ul>
         </div>
 
         <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          찬장에 넣어둔 종합 비타민처럼 유산균도 영원히 효과가 지속될까요? 아쉽게도 그렇지 않습니다. 프로바이오틱스는 살아있는 생명체이기 때문에 수명이 존재하며, 유통기한이 지남에 따라 그 효력을 잃게 됩니다. 유산균의 생존과 유통기한에 대한 진실을 알아봅니다.
+          장 건강을 위해 프로바이오틱스를 챙겨 드시고 계신가요? 이는 전반적인 웰빙을 위한 아주 훌륭한 습관입니다. 하지만 우리가 섭취하는 유산균이 '살아있는 박테리아'라는 점을 떠올려보면 한 가지 의문이 생깁니다. <strong>"유산균에도 유통기한이 있을까요?"</strong> 짧게 답하자면, <strong>"네, 있습니다."</strong> 프로바이오틱스는 살아있는 생명체이기에 언젠가는 죽게 마련이며, 정확히 언제 효력을 잃는지는 제품마다 다릅니다.<br/><br/>
+          우리는 전문가들의 의견을 바탕으로 유산균의 유통기한이 어떻게 결정되는지, 무엇을 주의해야 하는지, 그리고 왜 Praxis가 냉장 보관 없이도 신선하게 유지되는지 자세히 설명해 드리고자 합니다.
         </p>
         
         <hr className="border-[#E0F2FE]" />
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">투입 균수 vs 보장 균수</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">유산균의 수명은 얼마나 될까요?</h3>
         <p className="text-slate-600 leading-loose">
-          많은 제품들이 "100억 마리 투입!"이라며 높은 숫자를 강조합니다. 하지만 소비자가 주목해야 할 것은 <strong>유통기한 끝까지 살아남는 균의 수(보장 균수)</strong>입니다. 제조 공장에서는 100억 마리를 넣었더라도, 유통 과정과 보관 기간을 거치며 균들이 죽어 나가, 막상 섭취할 때는 기대에 미치지 못할 수 있기 때문입니다.<br/><br/>
-          Trieb Praxis는 이를 방지하기 위해 <strong>오버리지(Overage)</strong> 기술을 적용합니다. 라벨에 표기된 110억 CFU(Colony Forming Units)를 보장하기 위해, 실제로는 제조 시점에 그보다 훨씬 많은 양을 투입하여 자연 감소분을 상쇄합니다.
+          유산균의 유통기한을 확인하는 가장 정확한 방법은 제품 패키지에 기재된 날짜를 확인하는 것입니다. 여기에는 유효 성분인 살아있는 유익균의 수, 즉 <strong>CFU(Colony-Forming Units)</strong>가 유통기한까지 얼마나 보장되는지도 함께 명시되어야 합니다.<br/><br/>
+          대부분의 프로바이오틱스는 약 1년 정도의 유통기한을 가집니다. 하지만 캡슐화 방식이나 냉장 보관 필요 여부, 그리고 사용된 균주에 따라 수명은 더 짧아질 수도, 길어질 수도 있습니다. 어떤 균주들은 태생적으로 다른 균주들보다 환경 변화에 더 취약하고 불안정하기 때문입니다.
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">AFU: 새로운 측정 기준</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">유통기한이 지난 유산균을 먹어도 되나요?</h3>
         <p className="text-slate-600 leading-loose">
-          일반적으로 유산균 수는 CFU(Colony Forming Units)로 측정합니다. 이는 실험실 배지에서 배양했을 때 군집을 형성하는 능력을 봅니다. 최근에는 형광 유세포 분석법을 이용한 AFU(Active Fluorescent Units)라는 새로운 단위도 등장했습니다. 하지만 여전히 전 세계적으로 통용되는 표준이자 임상 연구의 기준은 CFU입니다. Trieb는 가장 신뢰할 수 있는 CFU 단위를 기준으로 품질을 관리합니다.
+          가급적 유통기한이 지나기 전에 섭취할 것을 권장합니다. 냉장 보관용 제품이든 실온 보관 제품이든, 라벨에 표기된 보장 균수를 온전히 섭취하려면 기한 내 복용이 필수적입니다. 유통기한이 지난 제품에 대한 테스트 결과에 따르면, 시간이 지날수록 유효 성분의 농도와 효능은 점차 감소하게 됩니다. (1)
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">포장의 과학</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Trieb Praxis의 유통기한과 품질 유지</h3>
         <p className="text-slate-600 leading-loose">
-          유산균의 생명을 위협하는 가장 큰 적은 '수분'입니다. 동결 건조된 유산균은 수분을 만나면 잠에서 깨어나는데, 먹이가 없는 캡슐 안에서 깨어나면 곧 굶어 죽게 됩니다. 따라서 외부 습기를 완벽하게 차단하는 것이 중요합니다. Trieb는 일반적인 병이나 블리스터 포장 대신, 용기 내부에 흡습제가 내장된 특수 <strong>CSP 용기</strong>를 사용하여 마지막 한 캡슐까지 신선함을 유지합니다.
+          우리가 Praxis를 설계할 때 가장 중요하게 생각한 것은 '편의성'이었습니다. 언제 어디서든 챙겨 먹기 편해야 건강한 습관이 되기 때문입니다. 그래서 우리는 <strong>냉장 보관이 필요 없는(Shelf-stable)</strong> 실온 보관 기술을 적용했습니다. 습기를 완벽히 차단하도록 설계된 특수 용기를 사용해 유산균의 생존력을 극대화했습니다. (2)<br/><br/>
+          또한 우리는 세계에서 가장 활발히 임상 연구된 두 가지 균주인 <strong>Lactobacillus rhamnosus (LGG®)</strong>와 <strong>Bifidobacterium animalis ssp. lactis (BB-12®)</strong>를 선택했습니다. Trieb Praxis는 권장 보관 조건에서 보관 시, 제조일로부터 1년 동안 라벨에 표기된 균수를 안정적으로 보장합니다.*
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">보관 방법은 어떻게 되나요?</h3>
+        <p className="text-slate-600 leading-loose">
+          매우 간단합니다. Praxis를 종합 비타민 옆, 혹은 손이 잘 닿는 선반 위에 두세요. 습기가 없는 건조한 환경이면 충분합니다. 직사광선을 피해 서늘하고 건조한 곳에 보관하는 것이 유산균의 활동성을 가장 잘 유지하는 방법입니다.<br/><br/>
+          Trieb는 유통기한이 끝나는 그날까지 제품의 잠재력을 유지 위해 최선을 다합니다. 이제 여러분은 안심하고 여러분의 장에 무엇을 넣을지 결정하기만 하면 됩니다.
         </p>
 
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
           <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
-            <li>Fenster K, et al. "The production and delivery of probiotics: A review of a practical approach." Microorganisms. 2019.</li>
-            <li>Tripathi MK, Giri SK. "Probiotic functional foods: Survival of probiotics during processing and storage." Journal of Functional Foods. 2014.</li>
-            <li>Council for Responsible Nutrition. "Best Practices for Probiotics." 2017.</li>
+            <li>Wilcox, Hannah, Carr, Charles, Seney, Shannon, Reid, Gregor, Burton, Jeremy. (2020). “Expired Probiotics: What is Really in Your Cabinet?” Retrieved from FEMS Microbes.</li>
+            <li>Best Practices Guidelines for Probiotics. (2017). Retrieved from the Council for Responsible Nutrition.</li>
+            <li>Hogan DE, Ivanina EA, Robbins DH. (2018). Probiotics: a review for clinical use. Retrieved from Gastroenterology & Endoscopy News.</li>
+            <li>Fenster, Kurt, Freeburg, Barbara, Barbara, Hollard, Chris, Wong, Connie, Rønhave Laursen, Ouwehand, Arthur C. (2019). The Production and Delivery of Probiotics: A Review of a Practical Approach. Retrieved from Microorganisms.</li>
+            <li>Govender, Mershen, Choonara, Yahya E., Kumar, Pradeep, du Toit, Lisa C., van Vuuren, Sandy, Pillay, Viness Pillay. (2014) A Review of the Advancements in Probiotic Delivery: Conventional vs. Non-conventional Formulations for Intestinal Flora Supplementation. Retrieved from AAPS PharmSciTech.</li>
           </ol>
         </div>
       </div>
@@ -174,49 +184,53 @@ const ARTICLES_DATA: ArticleData[] = [
   },
   {
     id: 'selection',
-    title: "최적의 프로바이오틱스를 선택하는 방법",
+    title: "프로바이오틱스 선택 시 확인해야 할 4가지 요소",
     category: "GUIDE",
     image: "https://images.unsplash.com/photo-1550577624-42f7424ed08b?auto=format&fit=crop&q=80&w=800",
-    readTime: "6 min read",
+    readTime: "4 min read",
     content: (
       <div className="space-y-8">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
           <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>단순히 균수(CFU)가 높은 것이 아니라, 임상적으로 검증된 '균주(Strain)'인지 확인해야 합니다.</li>
-            <li>위산에서 살아남아 장까지 도달할 수 있는 전달 기술(캡슐)이 중요합니다.</li>
-            <li>투명한 성분 공개(Traceability)와 제3자 기관 검증 여부를 따져보세요.</li>
+            <li>시중에 정말 많은 제품이 출시되어 있어 고품질 프로바이오틱스 보충제를 선택하는 것이 까다로울 수 있습니다. 이에 Trieb의 과학 자문팀을 통해 장 건강 포뮬러에서 가장 중요하게 살펴봐야 할 핵심 요소가 무엇인지 확인했습니다.*</li>
+            <li>임상 연구된 균주부터 지연 방출형 캡슐까지, 구매를 결정하기 전 반드시 확인해야 할 4가지 핵심 요소를 정리해 드립니다.*</li>
           </ul>
         </div>
 
         <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          마트와 약국 진열대에는 수많은 유산균 제품이 있습니다. "100억 보장", "모유 유래", "17종 혼합" 등 화려한 문구들 사이에서, 과연 어떤 제품이 내 몸에 진짜 효과가 있을지 판단하기란 쉽지 않습니다. 과학적인 기준을 통해 옥석을 가려내는 방법을 알려드립니다.
+          <strong>ICYMI: 우리는 Praxis에 대해 <span className="underline decoration-[#0047AB] decoration-2 underline-offset-4">두 가지 체외 장 모델 연구</span>를 수행했으며, 결과는 매우 성공적이었습니다.</strong><br/><br/>
+          고품질 프로바이오틱스 보충제를 쇼핑하는 것은 생각보다 훨씬 어려울 수 있습니다. 시중에는 너무 많은 정보가 넘쳐나기 때문에 선택 과정이 더욱 혼란스럽죠. 장 건강 포뮬러에서 가장 중요하게 살펴봐야 할 특징이 무엇인지, 그리고 보충제가 실제로 신뢰할 수 있는지 어떻게 판단하는지 Trieb의 과학 자문팀에게 물었습니다. 그들이 전하는 답변은 다음과 같습니다.*
         </p>
 
         <hr className="border-[#E0F2FE]" />
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">1. 균주(Strain)의 명확성</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Check 1: 임상 연구된 함량</h3>
         <p className="text-slate-600 leading-loose">
-          프로바이오틱스를 선택할 때 가장 중요한 것은 성분표를 읽는 법입니다. 단순히 <em>Lactobacillus acidophilus</em>(종, Species)라고만 적혀 있다면 충분하지 않습니다. 중요한 것은 그 뒤에 붙는 <strong>균주(Strain)</strong> 명입니다.<br/><br/>
-          예를 들어 <em>Lactobacillus rhamnosus</em> <strong>GG</strong>, <em>Bifidobacterium animalis subsp. lactis</em> <strong>BB-12</strong> 처럼 끝까지 명시되어 있어야 합니다. 임상 연구는 '종'이 아닌 특정 '균주'를 대상으로 진행되기 때문입니다. 같은 종이라도 균주에 따라 효능은 천지차이입니다.
+          프로바이오틱스 보충제를 섭취할 때 가장 큰 고민은 '과연 이것이 제 역할을 하고 있을까?'일 것입니다. 이 불안을 덜어내는 가장 좋은 방법은 임상 연구에서 사용된 것과 동일한 함량의 균주를 함유한 포뮬러를 선택하는 것입니다. 이는 제품의 품질과 정밀함을 나타내는 중요한 지표입니다. 각 균주에 대해 임상 연구 데이터가 일치하는 브랜드를 선택한다면, "이게 정말 효과가 있는 거야?"라는 내면의 의심을 지울 수 있습니다.*
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">2. 생존력과 전달 시스템</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Check 2: 포스트바이오틱스 지원</h3>
         <p className="text-slate-600 leading-loose">
-          좋은 균을 섭취하더라도 위에서 다 죽어버리면 소용이 없습니다. 위산은 pH 1.5~3.5의 강한 산성으로, 대부분의 세균을 살균합니다. 따라서 유산균이 위를 안전하게 통과하여 소장과 대장까지 도달할 수 있도록 하는 기술이 필수적입니다.<br/><br/>
-          Trieb Praxis는 <strong>지연 방출형 캡슐(Delayed-Release Capsule)</strong> 기술을 사용합니다. 이 캡슐은 산성 환경인 위에서는 녹지 않고, pH가 중성에 가까워지는 소장에 도달해서야 붕해되도록 설계되었습니다.
+          장 건강을 지원하는 데 있어 프로바이오틱스의 이점은 이미 잘 알고 계실 것입니다. 하지만 그것이 전체 그림의 절반에 불과하다는 사실을 알고 계셨나요? 포스트바이오틱스—즉 발효 과정에서 미생물에 의해 생성되는 생리 활성 요소—는 또 다른 중요한 요소입니다. 시장의 상위 제품 중 대다수는 포스트바이오틱스를 포함하지 않지만, Praxis는 장벽을 구성하는 세포의 주요 에너지원인 뷰티르산을 공급하는 트리뷰티린(Tributyrin)을 함유하고 있습니다.* (1, 2)
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">3. 시너지 배합 (Synbiotics)</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Check 3: 투명한 균주 정보</h3>
         <p className="text-slate-600 leading-loose">
-          유산균(Probiotics)만 단독으로 섭취하는 것보다, 그들의 먹이가 되는 프리바이오틱스(Prebiotics)가 함께 배합된 <strong>신바이오틱스(Synbiotics)</strong> 제품을 선택하세요. 먹이가 함께 공급될 때 유산균의 생존율과 증식률이 비약적으로 높아지기 때문입니다.
+          신뢰할 수 있는 브랜드를 고르는 가장 간단한 방법 중 하나는 그들이 성분과 제조 과정에 대해 얼마나 투명하게 공개하는지 살펴보는 것입니다. 즉, 성분의 품질을 입증할 수 있는 '영수증'을 보여줄 수 있는지 확인하세요. Praxis의 경우, 모든 정보가 투명하게 공개되는 'Made Traceable™' 원칙을 따릅니다. 이는 원산지부터 제조 공정까지 모든 정보가 투명하게 공개됨을 의미하며, 이는 시중의 많은 브랜드가 쉽게 따라 할 수 없는 Trieb만의 기준입니다.*
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Check 4: 지연 방출형 캡슐</h3>
+        <p className="text-slate-600 leading-loose">
+          포뮬러 성분만큼이나 중요한 것이 바로 '전달 방식'입니다. 유산균은 위산이라는 험난한 환경을 지나 장까지 안전하게 도달해야 합니다. 전문가들은 위에서 녹지 않고 장에서 녹도록 설계된 <strong>DR(Delayed-Release) 캡슐</strong> 기술을 권장합니다. 이 기술은 핵심 성분이 위산의 가혹한 환경을 견뎌내고 목표 지점에 도달할 수 있도록 돕습니다.*<br/><br/>
+          또한, 습기에 민감한 유산균을 보호하기 위한 전용 용기(CSP 용기) 사용 여부도 꼭 확인해야 할 포인트입니다. Praxis는 이 모든 조건을 충족하여 마지막 한 알까지 최적의 상태를 유지합니다.
         </p>
 
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
           <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
-            <li>Hill C, et al. "The International Scientific Association for Probiotics and Prebiotics consensus statement on the scope and appropriate use of the term probiotic." Nat Rev Gastroenterol Hepatol. 2014.</li>
-            <li>McFarland LV, et al. "Strain-specificity and disease-specificity of probiotic efficacy: A systematic review and meta-analysis." Frontiers in Medicine. 2018.</li>
+            <li>Wegh CAM, Geerlings SY, Knol J, Roeselers G, Belzer C. Postbiotics and Their Potential Applications in Early Life Nutrition and Beyond. Int J Mol Sci. 2019 Sep 20;20(19):4673.</li>
+            <li>Campos-Perez W, Martinez-Lopez E. Effects of short chain fatty acids in human health. Biochim Biophys Acta Mol Cell Biol Lipids. 2021 Feb 9;1866(5):158900.</li>
           </ol>
         </div>
       </div>
