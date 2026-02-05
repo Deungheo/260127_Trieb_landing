@@ -133,14 +133,14 @@ const ARTICLES_DATA: ArticleData[] = [
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
           <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
           <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>프로바이오틱스 영양제 속 살아있는 균에도 분명 유통기한은 존재합니다. 하지만 기한이 지난 후에는 언제까지 유효할까요?</li>
-            <li>유산균의 유통기한(Shelf Life)은 사용된 균주, 캡슐화 기술, 그리고 보관 환경에 따라 결정됩니다.</li>
+            <li>프로바이오틱스 보충제 속 살아있는 균에도 분명 유통기한은 존재합니다. 하지만 기한이 지난 후에는 얼마나 오랫동안 효력이 유지될까요?</li>
+            <li>유산균의 유통기한은 사용된 균주, 캡슐화 기술, 그리고 보관 환경에 따라 결정됩니다.</li>
             <li>결론부터 말씀드리면, Trieb Praxis의 유통기한은 제조일로부터 약 1년입니다.</li>
           </ul>
         </div>
 
         <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          장 건강을 위해 프로바이오틱스를 챙겨 드시고 계신가요? 이는 전반적인 웰빙을 위한 아주 훌륭한 습관입니다. 하지만 우리가 섭취하는 유산균이 '살아있는 박테리아'라는 점을 떠올려보면 한 가지 의문이 생깁니다. <strong>"유산균에도 유통기한이 있을까요?"</strong> 짧게 답하자면, <strong>"네, 있습니다."</strong> 프로바이오틱스는 살아있는 생명체이기에 언젠가는 죽게 마련이며, 정확히 언제 효력을 잃는지는 제품마다 다릅니다.<br/><br/>
+          장 건강을 위해 <span className="underline decoration-[#0047AB] decoration-2 underline-offset-4">프로바이오틱스</span>를 챙겨 드시고 계신가요? 이는 전반적인 웰빙을 지원하는 매우 훌륭하고 긍정적인 습관입니다. 하지만 우리가 섭취하는 유산균이 '살아있는 박테리아'라는 점을 떠올려보면 한 가지 의문이 생깁니다. <strong>"유산균에도 유통기한이 있을까요?"</strong> 짧게 답하자면, <strong>"네, 있습니다."</strong> 프로바이오틱스도 살아있는 생명체이기에 언젠가는 사멸하게 되며, 정확히 언제 효력을 잃는지는 제품의 특성에 따라 다릅니다.<br/><br/>
           우리는 전문가들의 의견을 바탕으로 유산균의 유통기한이 어떻게 결정되는지, 무엇을 주의해야 하는지, 그리고 왜 Praxis가 냉장 보관 없이도 신선하게 유지되는지 자세히 설명해 드리고자 합니다.
         </p>
         
@@ -148,8 +148,7 @@ const ARTICLES_DATA: ArticleData[] = [
 
         <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">유산균의 수명은 얼마나 될까요?</h3>
         <p className="text-slate-600 leading-loose">
-          유산균의 유통기한을 확인하는 가장 정확한 방법은 제품 패키지에 기재된 날짜를 확인하는 것입니다. 여기에는 유효 성분인 살아있는 유익균의 수, 즉 <strong>CFU(Colony-Forming Units)</strong>가 유통기한까지 얼마나 보장되는지도 함께 명시되어야 합니다.<br/><br/>
-          대부분의 프로바이오틱스는 약 1년 정도의 유통기한을 가집니다. 하지만 캡슐화 방식이나 냉장 보관 필요 여부, 그리고 사용된 균주에 따라 수명은 더 짧아질 수도, 길어질 수도 있습니다. 어떤 균주들은 태생적으로 다른 균주들보다 환경 변화에 더 취약하고 불안정하기 때문입니다.
+          유산균의 유통기한을 확인하는 가장 정확한 방법은 제품 패키지에 기재된 날짜를 확인하는 것입니다. 여기에는 유효 성분인 살아있는 유익균의 수, 즉 <strong>CFU(Colony-Forming Units)</strong>가 유통기한까지 얼마나 보장되는지도 함께 명시되어야 합니다. 대부분의 프로바이오틱스는 약 1년 정도의 유통기한을 가집니다. 하지만 캡슐화 방식이나 냉장 보관 필요 여부, 그리고 사용된 균주에 따라 수명은 더 짧아질 수도, 길어질 수도 있습니다. 어떤 균주들은 태생적으로 다른 균주들보다 환경 변화에 더 취약하고 불안정하기 때문입니다.
         </p>
 
         <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">유통기한이 지난 유산균을 먹어도 되나요?</h3>
@@ -165,8 +164,8 @@ const ARTICLES_DATA: ArticleData[] = [
 
         <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">보관 방법은 어떻게 되나요?</h3>
         <p className="text-slate-600 leading-loose">
-          매우 간단합니다. Praxis를 종합 비타민 옆, 혹은 손이 잘 닿는 선반 위에 두세요. 습기가 없는 건조한 환경이면 충분합니다. 직사광선을 피해 서늘하고 건조한 곳에 보관하는 것이 유산균의 활동성을 가장 잘 유지하는 방법입니다.<br/><br/>
-          Trieb는 유통기한이 끝나는 그날까지 제품의 잠재력을 유지 위해 최선을 다합니다. 이제 여러분은 안심하고 여러분의 장에 무엇을 넣을지 결정하기만 하면 됩니다.
+          매우 간단합니다. Praxis를 종합 비타민 옆, 혹은 손이 잘 닿는 선반 위에 두세요. 습기가 없는 건조한 환경이면 충분합니다. 뚜껑을 꼭 닫아 원래의 패키지 그대로 보관하는 것을 추천합니다. 직사광선을 피해 서늘하고 건조한 곳에 보관하는 것이 유산균의 활동성을 가장 잘 유지하는 방법입니다.<br/><br/>
+          Trieb는 유통기한이 끝나는 그날까지 제품의 잠재력을 유지하기 위해 최선을 다합니다. 이제 여러분은 안심하고 여러분의 장에 무엇을 넣을지 결정하기만 하면 됩니다.
         </p>
 
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
@@ -238,48 +237,67 @@ const ARTICLES_DATA: ArticleData[] = [
   },
   {
     id: 'timing',
-    title: "유산균, 언제 섭취하는 것이 가장 좋을까요?",
+    title: "과학적으로 증명된 유산균 섭취의 최적 시간",
     category: "ROUTINE",
     image: "https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&q=80&w=800",
-    readTime: "3 min read",
+    readTime: "6 min read",
     content: (
       <div className="space-y-8">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
           <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>일반적인 유산균은 위산이 희석된 '식사 중'이나 '식후' 섭취가 권장됩니다.</li>
-            <li>지연 방출형 캡슐 기술이 적용된 제품은 식전/식후 관계없이 섭취 가능합니다.</li>
-            <li>가장 중요한 것은 '시간대'보다 '매일 꾸준히' 먹는 습관입니다.</li>
+            <li>프로바이오틱스는 장 건강, 소화기 건강, 그리고 면역력 강화를 도울 수 있는 "유익균"입니다.*</li>
+            <li>그렇다면 이들을 섭취하기 위한 가장 이상적인 시간은 언제일까요? 전문가들의 분석을 정리했습니다.*</li>
           </ul>
         </div>
 
         <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          아침 공복에 물 한 잔과 함께? 아니면 저녁 식사 후에? 유산균 섭취 시간에 대한 의견은 분분합니다. 어떤 것이 과학적으로 옳은 방법일까요? 결론부터 말하자면, 제품의 기술력에 따라 정답은 달라집니다.
+          장내 미생물 생태계를 관리하는 여정은 매우 개인적인 일이지만, 유산균 섭취를 시작한 분들이 공통적으로 겪는 궁금증이 있습니다. "내가 지금 잘하고 있는 건가?" "최대의 효과를 보려면 언제 먹어야 할까?" "공복에 먹어야 할까, 식사 후에 먹어야 할까?" 장 건강을 위한 이 중요한 결정에 대해 전문가들의 의견을 확인해 보시기 바랍니다.*
         </p>
 
         <hr className="border-[#E0F2FE]" />
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">위산의 공격을 피하라</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">왜 유산균 보충제가 필요한가요?</h3>
         <p className="text-slate-600 leading-loose">
-          프로바이오틱스 섭취의 최대 난관은 '위산'입니다. 공복 상태의 위 내부는 pH 2 이하의 강한 산성을 띱니다. 반면 식사를 하면 음식물이 위산을 중화시켜 pH가 일시적으로 상승합니다. 따라서 보호 코팅이 없는 일반적인 1세대 유산균이나 요거트라면, 위산의 공격이 덜한 <strong>식사 도중이나 식사 직후</strong>에 먹는 것이 생존율을 높이는 방법입니다.
+          균형 잡힌 식단을 유지하는 사람이라도 유산균 보충제를 루틴에 추가해야 할 이유는 충분합니다. 부적절한 식습관, 스트레스, 잦은 여행, 특정 약물 복용 및 환경적 요인으로 인해 장내 마이크로바이옴의 불균형이 발생하기 쉽기 때문입니다. 현대인의 삶에서 이는 매우 현명한 선택입니다.* (2, 4, 5)
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">기술이 만드는 자유</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">발효 식품만으로는 부족할 수 있습니다</h3>
         <p className="text-slate-600 leading-loose">
-          하지만 현대의 기술은 이러한 제약을 극복했습니다. Trieb Praxis에 적용된 <strong>지연 방출형 캡슐(Delayed-Release Capsule)</strong>은 위산의 산도에서는 녹지 않고 견디다가, 소장에 도달했을 때 비로소 붕해되도록 설계되었습니다.<br/><br/>
-          이러한 기술이 적용된 제품이라면 공복이든 식후든 상관없습니다. 아침에 일어나서 양치 후 먹거나, 점심 식사 전 챙겨 먹는 등 여러분의 라이프스타일에 가장 편한 시간을 선택하면 됩니다.
+          장 건강을 위해 케피어, 사워크라우트, 김치, 콤부차 같은 발효 식품을 찾는 분들이 많습니다. 하지만 연구에 따르면 이러한 식품 속 박테리아가 가혹한 위산과 소화 과정을 견디고 대장까지 살아남아 정착할 확률은 생각보다 높지 않습니다. (2)<br/><br/>
+          따라서 임상적으로 설계된 보충제는 장까지의 안전한 도달을 보장하는 매우 매력적인 대안이 될 수 있습니다.
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">일관성의 힘</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">얼마나 자주 섭취해야 하나요?</h3>
         <p className="text-slate-600 leading-loose">
-          장내 미생물 생태계는 하루아침에 바뀌지 않습니다. 유익균이 정착하고 군락을 형성하기 위해서는 지속적인 공급이 필수적입니다. 따라서 가장 좋은 섭취 시간은 <strong>'여러분이 까먹지 않고 매일 챙길 수 있는 시간'</strong>입니다. 침대 머리맡이나 정수기 옆 등 눈에 잘 띄는 곳에 두고 매일의 루틴으로 만드세요.
+          "유산균에서 가장 중요한 키워드는 바로 '일관성(Consistency)'입니다."라고 Ritual의 수석 과학자인 Arianne Vance, MPH는 설명합니다. 유익균은 장내에 영구적으로 머무르지 않고 며칠 혹은 몇 주 내에 배출되기도 하므로, 이상적으로는 <strong>매일 꾸준히</strong> 섭취하여 장내 환경을 지속적으로 지원하는 것이 중요합니다.* (2, 3)
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">전문가들이 말하는 최적의 섭취 시간</h3>
+        <p className="text-slate-600 leading-loose">
+          유산균 섭취의 최적 시간은 제품의 '브랜드'와 '기술력'에 따라 달라집니다. 어떤 브랜드는 공복 섭취를 권장하고, 어떤 브랜드는 식사 중 섭취를 제안합니다. 하지만 가장 진보된 방식은 시간이나 식사 여부에 상관없이 언제든 여러분의 일정에 맞춰 편하게 섭취할 수 있는 제품을 선택하는 것입니다. <strong>중요한 것은 시간을 맞추는 것보다 매일 먹는 습관을 만드는 것입니다.</strong>*<br/><br/>
+          품질과 효율성을 위해 다음 세 가지 질문을 체크해 보세요:
+        </p>
+        <ul className="list-disc list-inside space-y-4 text-slate-600 bg-slate-50 p-6 rounded-2xl">
+          <li><strong>임상 연구된 균주인가?</strong> 균주의 종류에 따라 효과가 다를 수 있으므로 인체 적용 시험 데이터가 뒷받침되는지 확인하세요.* (1, 2, 3)</li>
+          <li><strong>어떤 전달 기술을 사용하는가?</strong> 위산에서 녹지 않고 장에서 녹도록 설계된 지연 방출형(Delayed-Release) 캡슐인지 확인하세요. 이는 성분이 목표 지점에 무사히 도달하도록 돕습니다.*</li>
+          <li><strong>냉장 보관이 필요한가?</strong> 실온에서도 안정성이 유지되는(Shelf-stable) 제품은 접근성이 좋아 매일 챙겨 먹는 루틴을 만드는 데 훨씬 유리합니다.*</li>
+        </ul>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Bottom Line?</h3>
+        <p className="text-slate-600 leading-loose">
+          가장 좋은 섭취 시간은 라벨에 적힌 지침을 따르는 것입니다. 하지만 Praxis처럼 <strong>실온 보관이 가능하고 임상적으로 검증된 성분</strong>을 담은 제품을 선택했다면 이미 절반의 승리를 거둔 셈입니다. 결국 핵심은 '꾸준함'이며, 이를 위해서는 여러분의 라이프스타일에 가장 '편리한' 시간이 곧 가장 '최적'의 시간입니다.*
         </p>
 
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
           <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
-            <li>Tompkins TA, et al. "The impact of meals on a probiotic during transit through a model of the human upper gastrointestinal tract." Beneficial Microbes. 2011.</li>
-            <li>Bezkorovainy A. "Probiotics: determinants of survival and growth in the gut." Am J Clin Nutr. 2001.</li>
+            <li>Guarner F, Sanders ME, Eliakim R, et al. World Gastroenterology Organization. World Gastroenterology Organisation Global Guidelines: Probiotics and Prebiotics. 2017.</li>
+            <li>Office of Dietary Supplements. Probiotics: Fact Sheet for Health Professionals. National Institutes of Health, Department of Health & Human Services. 2020.</li>
+            <li>World Health Organization. Guidelines for the Evaluation of Probiotics in Food. Report of a Joint FAO/WHO Working Group on Drafting Guidelines for the Evaluation of Probiotics in Food. 2002.</li>
+            <li>Gilbert JA, Blaser MJ, Caporaso JG, Jansson JK, Lynch SV, Knight R. Current understanding of the human microbiome. Nat Med. 2018;24(4):392-400.</li>
+            <li>Lynch SV, Pedersen O. The Human Intestinal Microbiome. N Engl J Med. 2016 Dec 15;375(24):2369-2379.</li>
+            <li>McFarland L. V. (2015). From yaks to yogurt: the history, development, and current use of probiotics. Clinical... : an official publication of the... Society of America, 60 Suppl 2, S85–S90.</li>
           </ol>
         </div>
       </div>
@@ -340,191 +358,166 @@ const ARTICLES_DATA: ArticleData[] = [
     title: "프리바이오틱스 vs 프로바이오틱스: 차이점이 무엇인가요?",
     category: "COMPARISON",
     image: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&q=80&w=800",
-    readTime: "4 min read",
+    readTime: "5 min read",
     content: (
       <div className="space-y-8">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
           <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>프로바이오틱스는 '유익균(씨앗)', 프리바이오틱스는 '유익균의 먹이(비료)'입니다.</li>
-            <li>프리바이오틱스는 소화되지 않고 장까지 내려가 유익균의 성장을 돕습니다.</li>
-            <li>이 둘을 함께 섭취하는 것을 '신바이오틱스(Synbiotics)'라고 합니다.</li>
+            <li>프리바이오틱스와 프로바이오틱스를 논하지 않고는 장 건강 지원에 대해 이야기할 수 없습니다. 이 두 가지는 장 건강에 있어 가장 흔히 언급되는 용어입니다.*</li>
+            <li>이 글을 통해 프리바이오틱스와 프로바이오틱스의 차이점을 알아보고, 왜 이 둘이 소화기 건강을 돕는 데 중요한지 확인해 보세요.*</li>
           </ul>
         </div>
 
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          건강기능식품 코너에서 '프리(Pre)'와 '프로(Pro)'라는 단어를 보고 헷갈린 적이 있으신가요? 글자 하나 차이지만 그 역할은 하늘과 땅 차이입니다. 정원을 가꾸는 것에 비유하여 이 둘의 관계를 명쾌하게 설명해 드립니다.
+        <h3 className="text-xl font-bold text-slate-800 serif-italic mt-12">하지만 먼저... 포스트바이오틱스가 장 건강의 숨겨진 열쇠일까요?</h3>
+        <p className="text-slate-600 leading-loose mt-4">
+          상상해 보세요: 때는 2022년입니다. 웰니스가 대세로 자리 잡았고, 그 중심에는 '장 건강(gut health)'이 있습니다. 여러분도 장을 지원하고 싶어 인터넷을 뒤지며 정보를 찾습니다. 오래 걸리지 않아 '프로바이오틱스'에 대한 언급과 균형 잡힌 마이크로바이옴의 중요성을 강조하는 기사들이 여러분의 관심을 사로잡습니다. "당신이 먹는 것이 곧 당신이다"라는 말을 읽게 되죠. 더 정확히 말하면, 여러분의 장 속에서 무엇을 먹고 사느냐가 곧 여러분의 건강을 결정합니다.*
+          <br/><br/>
+          어리둥절하고 조금 혼란스럽지만, 여러분은 더 깊이 파고듭니다. 이 질문에 답을 찾기 전까지는 멈추지 않을 기세입니다. 그 진술이 정말 사실일까요? 정확히 프로바이오틱스는 무엇일까요? 이 미생물들이 정말 장을 지원할까요? 그리고 이 지식을 어떻게 내 몸에 적용할까요? 장 건강을 지원하는 길은 디스토피아처럼 느껴질 필요가 없습니다. 회의론자로서 여러분의 입장이 되어 그 과정을 명확히 밝혀드리겠습니다. 스크롤을 내려 프로바이오틱스와 프리바이오틱스의 차이점을 알아보고, 왜 이 두 가지가 장 건강을 지원하는 핵심 요소인지 확인해 보세요.*
         </p>
+
+        <div className="bg-[#F0F7FF] border border-[#E0F2FE] rounded-2xl p-8 my-8">
+           <h4 className="text-xl font-bold text-[#0047AB] mb-4">Meet Our Game-Changing Gut Health Supplement</h4>
+           <p className="text-slate-600 mb-6 text-sm">3-in-1 clinically-studied prebiotics, probiotics and postbiotics to support gas, bloating, diarrhea, and healthy regularity.*</p>
+           <button className="bg-[#0047AB] text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-blue-800 transition-colors">
+             Get 20% Off Praxis+
+           </button>
+        </div>
 
         <hr className="border-[#E0F2FE]" />
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">프로바이오틱스: 씨앗 (The Seed)</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">What Are Probiotics?</h3>
         <p className="text-slate-600 leading-loose">
-          <strong>프로바이오틱스(Probiotics)</strong>는 살아있는 유익한 박테리아 자체를 말합니다. 황무지가 된 장이라는 토양에 심는 '씨앗'이라고 생각하면 됩니다. 락토바실러스나 비피도박테리움 등이 대표적이며, 이들이 장에 정착하여 군락을 이루는 것이 목표입니다.
+          세계보건기구(WHO)에 따르면, 프로바이오틱스는 적절한 양을 섭취했을 때 숙주에게 건강상의 이점을 제공하는 살아있는 박테리아 균주(흔히 "유익균"이라 불림)입니다. 이는 <span className="underline decoration-blue-200">면역(LGG®, BB-12®)</span> 및 <span className="underline decoration-blue-200">소화기 건강</span>을 지원할 수 있습니다.* (5, 6)
+          <br/><br/>
+          이러한 유형의 박테리아는 위장관에 일시적으로만 거주할 수 있기 때문에(최대 며칠 또는 몇 주), 지속적인 기반 위에서 섭취해야 한다는 증거가 있습니다. 이상적으로는 매일 섭취하는 것이 좋습니다.* (2, 6)
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">프리바이오틱스: 비료 (The Fertilizer)</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">What Are Prebiotics?</h3>
         <p className="text-slate-600 leading-loose">
-          <strong>프리바이오틱스(Prebiotics)</strong>는 우리 몸의 효소로는 소화되지 않는 식이섬유나 성분을 말합니다. 소화되지 않고 대장까지 내려간 이 성분들은 그곳에 살고 있는 유익균들의 훌륭한 '먹이'가 됩니다.<br/><br/>
-          아무리 좋은 씨앗(프로바이오틱스)을 심어도, 영양분(프리바이오틱스)이 없으면 싹을 틔우고 자랄 수 없습니다. 프리바이오틱스는 유익균의 증식을 돕고 활동성을 높이는 비료 역할을 합니다.
+          살아있는 유기체인 <i>프로바이오틱스</i>와 달리, 프리바이오틱스는 살아있는 유기체가 아닙니다. 이들은 우리 장에 이미 존재하는 "유익균"을 전략적으로 지원하는 소화되지 않는 식품 성분입니다. 특정 프리바이오틱스는 복합 탄수화물에서 발견되는 것과 같이 소화기 시스템에 서식하는 유익균의 영양분 역할을 합니다. PreforPro®는 원치 않는 박테리아를 표적으로 삼는 반면, 유익한 장내 박테리아의 성장을 돕도록 설계되었습니다. 프리바이오틱스 보충제나 식품의 형태와 비슷합니다.* (5, 6, 7, 8)
+          <br/><br/>
+          식품 공급원 측면에서 프리바이오틱스는 일반적으로 복합 탄수화물에서 발견됩니다. (복합 탄수화물은 소화기 시스템이 처리하기 어렵고, 대장에 온전하게 도착하여 그곳에 거주하는 유익한 박테리아의 영양분 역할을 합니다.)* (2, 9)
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">신바이오틱스: 완벽한 콤비</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Sources of Prebiotics and Probiotics</h3>
         <p className="text-slate-600 leading-loose">
-          따라서 이 둘은 떼려야 뗄 수 없는 관계입니다. 프로바이오틱스와 프리바이오틱스를 함께 배합한 제품을 <strong>신바이오틱스(Synbiotics)</strong>라고 부릅니다. Trieb Praxis는 여기에 유산균의 대사산물인 포스트바이오틱스까지 더하여, 씨앗과 비료, 그리고 수확물까지 한 번에 제공하는 차세대 솔루션입니다.
+          보충제를 섭취하는 것 외에도 식단에 포함시킬 수 있는 많은 발효 식품 및 프리바이오틱스 식품이 있습니다. 많은 발효 식품과 음료가 건강한 식단과 관련이 있지만(일부는 건강상의 이점과 관련이 있을 수도 있음!), 살아있는 배양균이 위장과 소장 내의 가혹한 조건을 견디고 자연적으로 살아남을 수 있다는 증거는 실제로 거의 없습니다. (2, 10, 11) 더군다나 연구에 따르면 발효 식품과 음료에는 일반적으로 입증된 프로바이오틱 미생물이 포함되어 있지 않습니다. 이것이 고품질 <span className="underline decoration-blue-200">프로바이오틱스 보충제</span>를 섭취하는 것이 장내 세균총을 지원하는 데 도움이 될 수 있는 이유입니다.* (2, 10, 11)
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Can You Take Prebiotics And Probiotics Together?</h3>
+        <p className="text-slate-600 leading-loose">
+          우리는 실제로 그것을 권장합니다. 그래서 우리는 임상적으로 연구된 프리바이오틱스, 프로바이오틱스 및 포스트바이오틱스를 결합한 자체 장 건강 보충제를 만들었습니다. <span className="underline decoration-blue-200">Praxis+</span>는 균형 잡힌 장내 세균총을 지원하기 위해 매일 섭취하도록 만들어진 3-in-1 보충제입니다.*
+        </p>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Prebiotics vs. Probiotics: The Bottom Line</h3>
+        <p className="text-slate-600 leading-loose">
+          요약하자면: 프로바이오틱스는 우리 장내 유익균의 개체 수를 늘리는 반면, 프리바이오틱스는 유익균의 성장을 돕습니다. 두 가지 모두를 충분히 섭취하는 것은 까다로울 수 있습니다. 특히 프리바이오틱스 식품을 섭취하는 데 어려움을 겪거나 발효 식품을 즐기지 않는 경우라면 더욱 그렇습니다. 좋은 소식은 장 건강을 지원하는 <span className="underline decoration-blue-200">보충제</span>가 있다는 것입니다.*
         </p>
 
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
-          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
-            <li>Gibson GR, et al. "Expert consensus document: The International Scientific Association for Probiotics and Prebiotics (ISAPP) consensus statement on the definition and scope of prebiotics." Nat Rev Gastroenterol Hepatol. 2017.</li>
-            <li>Pandey KR, et al. "Probiotics, prebiotics, and synbiotics- a review." J Food Sci Technol. 2015.</li>
-          </ol>
+          <ul className="list-none space-y-2 text-xs text-slate-400 font-mono">
+            <li>Lynch SV, Pedersen O. The Human Intestinal Microbiome. N Engl J Med. 2016 Dec 15;375(24):2369-2379.</li>
+            <li>Office of Dietary Supplements. Probiotics: Fact Sheet for Health Professionals. National Institutes of Health, Department of Health & Human Services. 2020.</li>
+            <li>Robles Alonso V, Guarner F. Linking the gut microbiota to human health. Br J Nutr. 2013 Jan;109 Suppl 2:S21-6.</li>
+            <li>Gilbert JA, Blaser MJ, Caporaso JG, Jansson JK, Lynch SV, Knight R. Current understanding of the human microbiome. Nat Med. 2018;24(4):392-400.</li>
+            <li>Gibson GR, Roberfroid MB. Dietary modulation of the human colonic microbiota: introducing the concept of prebiotics. J Nutr. 1995 Jun;125(6):1401-12.</li>
+            <li>World Health Organization. Guidelines for the Evaluation of Probiotics in Food. Report of a Joint FAO/WHO Working Group on Drafting Guidelines for the Evaluation of Probiotics in Food. 2002.</li>
+            <li>National Center for Complementary and Integrative Health (NCCIH). Probiotics: What You Need To Know. National Institutes of Health, Department of Health & Human Services. 2019.</li>
+            <li>Pineiro M, Asp NG, Reid G, Macfarlane S, Morelli L, Brunser O, Tuohy K. FAO Technical meeting on prebiotics. J Clin Gastroenterol. 2008 Sep;42 Suppl 3 Pt 2:S156-9.</li>
+            <li>Roberfroid M, Gibson GR, Hoyles L, et al. Prebiotic effects. Br J Nutr. 2010 Aug;104 Suppl 2:S1-63.</li>
+            <li>Hill, C., Guarner, F., Reid, G., Gibson, G.R., Merenstein, D.J., Pot, B., Morelli, L., Canani, R.B., Flint, H.J., Salminen, S., Calder, P.C., & Sanders, M.E. (2014). The International Scientific Association for Probiotics and Prebiotics consensus statement on the scope and appropriate use of the term probiotic. Nature Reviews Gastroenterology & Hepatology, 11(8), 506-514.</li>
+            <li>Jäger R, Mohr AE, Carpenter KC, Kerksick CM, Purpura M, Moussa A, Townsend JR, Lamprecht M, West NP, Black K, Gleeson M, Pyne DB, Wells SD, Arent SM, Smith-Ryan AE, Kreider RB, Campbell BI, Bannock L, Scheiman J, Wissent CJ, Pane M, Kalman DS, Pugh JN, Ter Haar JA, Antonio J. International Society of Sports Nutrition Position Stand: Probiotics. J Int Soc Sports Nutr. 2019 Dec 21;16(1):62.</li>
+            <li>Carlson, J. L., Erickson, J. M., Lloyd, B. B., & Slavin, J. L. (2018). Health Effects and Sources of Prebiotic Dietary Fiber. Current developments in nutrition, 2(3), nzy005.</li>
+          </ul>
         </div>
       </div>
     )
   },
   {
     id: 'mechanism',
-    title: "프로바이오틱스는 어떻게 작용하나요?",
+    title: "프로바이오틱스는 어떻게 작용하나요? 박테리아의 '착한' 종류에 숨겨진 과학",
     category: "MECHANISM",
     image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&q=80&w=800",
-    readTime: "5 min read",
-    content: (
-      <div className="space-y-8">
-        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
-          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>유익균은 장내에서 유해균과 경쟁하여 그들의 성장을 억제합니다(경쟁적 배제).</li>
-            <li>장 점막을 튼튼하게 하여 유해 물질이 침투하지 못하도록 방어벽을 강화합니다.</li>
-            <li>면역 세포와 상호 작용하여 과도한 면역 반응을 조절하고 전반적인 면역력을 지원합니다.</li>
-          </ul>
-        </div>
-
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          눈에 보이지 않는 미세한 박테리아가 어떻게 소화 불량부터 피부 트러블, 심지어 기분까지 영향을 미칠까요? 프로바이오틱스가 우리 몸속에서 수행하는 세 가지 주요 작용 메커니즘을 알아봅니다.
-        </p>
-
-        <hr className="border-[#E0F2FE]" />
-
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">1. 경쟁적 배제 (영토 전쟁)</h3>
-        <p className="text-slate-600 leading-loose">
-          장은 한정된 공간이고 영양분도 제한적입니다. 유익균이 장벽에 먼저 자리를 잡고 먹이를 선점하면, 병원성 박테리아(유해균)는 설 곳을 잃고 굶주리게 됩니다. 이를 '경쟁적 배제(Competitive Exclusion)'라고 합니다. 또한 유산균은 젖산(Lactic acid)을 분비하여 장내 환경을 산성으로 만드는데, 대부분의 유해균은 산성 환경에서 생존하기 어렵습니다.
-        </p>
-
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">2. 장벽 강화 (성벽 보수)</h3>
-        <p className="text-slate-600 leading-loose">
-          우리의 장 점막은 외부의 독소와 병원균이 혈류로 들어오지 못하게 막는 1차 방어선입니다. 유익균은 장 상피세포 사이의 결합(Tight Junction)을 단단하게 유지하도록 돕고, 점액 분비를 촉진하여 물리적인 방어벽을 강화합니다. 이는 흔히 말하는 '장 누수 증후군'을 예방하는 데 중요한 역할을 합니다.
-        </p>
-
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">3. 면역 조절 (지휘관 역할)</h3>
-        <p className="text-slate-600 leading-loose">
-          인체 면역 세포의 70% 이상이 장에 집중되어 있다는 사실을 아시나요? 장내 미생물은 장 점막 아래의 면역 세포들과 끊임없이 신호를 주고받습니다. 유익균은 면역 세포가 바이러스에 대항하도록 훈련시키기도 하고, 반대로 알레르기나 염증 같은 과도한 면역 반응은 진정시키는 지휘관(Regulator) 역할을 수행합니다.
-        </p>
-
-        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
-          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
-          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
-            <li>Plaza-Diaz J, et al. "Mechanisms of Action of Probiotics." Advances in Nutrition. 2019.</li>
-            <li>Bermudez-Brito M, et al. "Probiotic mechanisms of action." Annals of Nutrition and Metabolism. 2012.</li>
-          </ol>
-        </div>
-      </div>
-    )
-  },
-  {
-    id: 'signs',
-    title: "유산균이 효과가 있다는 신호들",
-    category: "RESULTS",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800",
     readTime: "4 min read",
     content: (
       <div className="space-y-8">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
           <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>섭취 초기(첫 주)에는 가스가 차거나 배가 꾸르륵거리는 일시적인 적응 증상이 나타날 수 있습니다.</li>
-            <li>몇 주가 지나면 배변 활동이 규칙적으로 변하고 속이 편안해집니다.</li>
-            <li>장기적으로는 피부 개선, 활력 증진 등 전신적인 건강 혜택을 경험할 수 있습니다.</li>
+            <li>박테리아는 우리 전반적인 건강에 중요한 역할을 합니다. 장내 마이크로바이옴을 생각해보세요. 이곳은 신체 내 대부분의 박테리아가 거주하는 곳으로, 장과 소화기 건강을 지원하는 것부터 면역 건강을 지원하는 것까지 모든 일이 일어나는 미션 컨트롤 센터와 같습니다.</li>
+            <li>프로바이오틱스는 우리 시스템에서 "유익한" 박테리아를 지원하는 데 핵심적인 역할을 하며, 우리의 웰빙을 지원하는 번성하는 커뮤니티를 육성하도록 돕습니다.</li>
           </ul>
         </div>
 
         <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          유산균 섭취를 시작했는데 아무런 변화가 없거나, 오히려 배에 가스가 차서 당황스러우신가요? 걱정하지 마세요. 장내 환경이 재건축되는 과정에서 일어나는 자연스러운 반응일 수 있습니다. 시간의 흐름에 따라 나타나는 몸의 변화를 미리 알아두세요.
+          주목하세요: 가스가 차는 분들, 더부룩한 분들, 그리고 프로바이오틱스 지원을 찾는 모든 분들. 혹시 놓치셨을까 봐 말씀드리자면, 우리는 2022년 봄에 첫 번째 장 건강 지원 제품인 <span className="underline decoration-blue-200">Synbiotic+</span>를 출시했습니다. 이는 임상적으로 연구된 프리바이오틱스, <span className="underline decoration-blue-200">프로바이오틱스</span>, <span className="underline decoration-blue-200">포스트바이오틱스</span>를 하나로 담아 균형 잡힌 장내 세균총을 지원하는 3-in-1 제품입니다. 이 놀라운 과학이 생소한 분들을 위해, 프로바이오틱스가 어떻게 작용하는지 잠시 설명해 드리겠습니다.
+          <br/><br/>
+          먼저, 이 모든 강력한 일들이 일어나는 배경을 설정해 봅시다: 바로 장내 마이크로바이옴입니다. "장내 마이크로바이옴"이라는 용어는 인간 위장관에 서식하는 박테리아 세포의 북적거리는 커뮤니티를 말합니다. (1) 우리 모두 장내 마이크로바이옴을 가지고 있지만, 환경, 라이프스타일, 그리고 영양, 스트레스, 여행 같은 요인에 따라 모든 사람의 마이크로바이옴은 다르게 보입니다. 이 모든 것들이 장내 마이크로바이옴의 불균형을 유발할 수 있으며, 이는 가끔 가스가 차거나, 더부룩함, 설사, 소화기 불편함으로 나타날 수 있습니다. (4)
+          <br/><br/>
+          프로바이오틱스를 섭취하는 것은 장내 마이크로바이옴과 장 장벽 기능을 지원하는 한 가지 방법입니다.* (2)
         </p>
 
-        <hr className="border-[#E0F2FE]" />
-
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">1단계: 적응기 (1~7일)</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">But First, Let’s Introduce the Different Types of Probiotic Strains</h3>
         <p className="text-slate-600 leading-loose">
-          새로운 유익균이 투입되어 기존의 미생물들과 경쟁하고 자리를 잡는 시기입니다. 이 과정에서 발효 활동이 활발해지며 일시적으로 가스가 차거나, 복부 팽만감, 가벼운 배변 변화(묽은 변 등)가 나타날 수 있습니다. 이를 흔히 '명현 현상'이라고 부르며, 보통 일주일 이내에 자연스럽게 사라집니다. 만약 불편함이 심하다면 섭취를 격일로 줄였다가 서서히 늘려보세요.
+          장내 미생물군은 여러 다른 종의 유기체로 구성되어 있습니다. 가장 흔하게 발견되는 형태로는 <i>Lactobacillus</i>, <i>Bacillus</i>, <i>Bifidobacterium</i>, <i>Clostridium</i>, <i>Enterococcus</i>, 그리고 <i>Ruminococcus</i>가 있습니다. (3) Synbiotic+는 <i>Lactobacillus</i>와 <i>Bifidobacterium</i> 중 임상적으로 연구된 두 가지 균주를 포함하고 있습니다: <i>Lactobacillus rhamnosus</i> GG (LGG®)와 <i>Bifidobacterium animalis</i> subsp. <i>lactis</i> BB-12 (BB-12®). 이들은 100건 이상의 인체 임상 시험 간행물에 의해 입증되었습니다. (4)
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">2단계: 안정기 (2~4주)</h3>
+        <div className="bg-[#F0F7FF] border border-[#E0F2FE] rounded-2xl p-8 my-8">
+           <h4 className="text-xl font-bold text-[#0047AB] mb-4">Meet Our Game-Changing Gut Health Supplement</h4>
+           <p className="text-slate-600 mb-6 text-sm">3-in-1 clinically-studied prebiotics, probiotics and postbiotics to support gas, bloating, diarrhea, and healthy regularity.*</p>
+           <button className="bg-[#0047AB] text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-blue-800 transition-colors">
+             Get 20% Off Synbiotic+
+           </button>
+        </div>
+
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Here’s What Happens When You Take Probiotics</h3>
         <p className="text-slate-600 leading-loose">
-          유익균이 자리를 잡고 장내 환경이 안정화되는 시기입니다. 가장 먼저 느끼는 변화는 <strong>규칙적인 배변</strong>입니다. 변비나 설사가 줄어들고, 변의 형태가 바나나 모양처럼 건강해집니다. 식사 후 더부룩함이 줄어들고 속이 한결 가볍고 편안해지는 것을 느낄 수 있습니다.
+          자, 여러분은 생애 첫 프로바이오틱스를 섭취했습니다. 잘하셨어요! 이제 여러분의 몸속에서 프로바이오틱스가 어떻게 작용하는지 알아봅시다.
+          <br/><br/>
+          프로바이오틱스가 섭취되는 순간부터 영웅의 여정을 떠난다고 생각해보세요. 소화관을 통과하여 비즈니스를 수행할 수 있는 장(증식하고 건강 혜택을 제공하는 곳)에 도달하려면, 우리 위장의 초산성 환경에서 살아남아야 합니다. 이것이 우리가 <span className="underline decoration-blue-200">Synbiotic+</span>를 <span className="underline decoration-blue-200">지연 방출 캡슐 기술(delayed-release capsule technology)</span>로 설계한 이유입니다. 이는 결장에 도달하도록 설계되어, 프로바이오틱스 박테리아가 번성하고 성장하기에 이상적인 장소로 만듭니다. 우리의 지연 방출 캡슐은 프로바이오틱스가 결장에 도달하도록 돕도록 설계되었습니다.* (4)
+          <br/><br/>
+          프로바이오틱스가 목적지인 위장관에 도착하면, 기본적으로 가게를 차리고 잠시 머물 곳을 찾습니다. 이곳에서 그들은 "유익한" 또는 "도움이 되는" 박테리아를 소개합니다. (7) 프로바이오틱스는 또한 장내에 존재하는 "유익한" 박테리아의 성장을 지원하며, 이는 장 건강을 지원하는 데 중요한 역할을 합니다.* (1)
+          <br/><br/>
+          프로바이오틱스가 궁극적으로 머무르기로 선택하는 곳은 장의 여러 영역 조건에 따라 다릅니다. 산도 수준, 산소 수준, 그리고 이미 그곳에 있는 박테리아 유형은 마이크로바이옴 전체에 걸친 프로바이오틱스의 움직임에 영향을 미칩니다. (7)
         </p>
 
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">3단계: 변화기 (1개월 이상)</h3>
+        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">Why Your Probiotic May <i>Not</i> Be Working</h3>
         <p className="text-slate-600 leading-loose">
-          장 건강이 전신 건강으로 이어지는 단계입니다. 장내 독소가 줄어들면서 피부가 맑아지거나 트러블이 완화될 수 있습니다. 영양소 흡수율이 좋아져 활력이 생기고, 면역력이 균형을 잡으면서 환절기 건강 관리에 도움이 됩니다. 어떤 분들은 기분이 좋아지거나 수면의 질이 개선되는 것을 경험하기도 합니다(장-뇌 축 이론). 꾸준함이 가져다주는 진짜 선물입니다.
+          만약 다른 프로바이오틱스를 시도해 보았지만 소화 기능이나 다른 위장 증상의 개선을 느끼지 못했다면, 다음과 같은 질문을 해보세요.
+        </p>
+
+        <h4 className="text-xl font-bold text-slate-800 mt-6">Does the probiotic have a delayed-release capsule?</h4>
+        <p className="text-slate-600 leading-loose mt-2">
+          지연 방출 캡슐은 <span className="underline decoration-blue-200">Synbiotic+</span>와 같이 "유익한" 박테리아가 결장에 도달하도록 돕습니다. 결장은 프로바이오틱스가 살아남고 성장하기에 이상적인 장소입니다. 지연 방출 캡슐이 없다면, "유익한" 박테리아는 위장에서 최후를 맞이할 수 있습니다. 그곳에서 증식하여 좋은 일을 시작하기도 전에 위산에 의해 사멸될 수 있습니다!* (4)
+        </p>
+
+        <h4 className="text-xl font-bold text-slate-800 mt-6">Are you storing the bottle correctly?</h4>
+        <p className="text-slate-600 leading-loose mt-2">
+          <span className="underline decoration-blue-200">일부 프로바이오틱스는 냉장 보관이 필요하며</span>, 살아있는 박테리아를 보호하기 위해 습기와 햇빛을 피해야 합니다. 이런 경우라면, 라벨이나 제조업체의 지침에 그렇게 적혀 있을 가능성이 높습니다. 프로바이오틱스를 올바르게 보관하지 않으면, 병에서 캡슐을 꺼내기도 전에 유익한 박테리아 균주가 사멸할 수 있습니다.
+          <br/><br/>
+          이러한 장벽을 제거하기 위해, 우리는 캡슐 내부의 균주를 보호하도록 설계된 수분 제어 병 기술을 사용하여 Synbiotic+를 설계했습니다—따라서 냉장 보관이 필요 없습니다! 우리는 여러분의 Ritual 멀티비타민 옆 선반이나 캐비닛에 보관하여 집에 약간의 여유를 가질 것을 권장합니다.
+        </p>
+
+        <h4 className="text-xl font-bold text-slate-800 mt-6">Are you taking the probiotic everyday?</h4>
+        <p className="text-slate-600 leading-loose mt-2">
+          프로바이오틱스에 있어서는 일관성이 핵심입니다! 프로바이오틱스 섭취를 중단하면, 앞서 소개된 건강한 박테리아 균주들은 며칠 또는 몇 주 동안만 위장관에 머물게 됩니다. (여러분의 장내 마이크로바이옴을 매일 가꾸어야 하는 정원이라고 생각해보세요.) 유익균을 지원하기 위해 매일 영양분을 공급해야 합니다. 프로바이오틱스를 둘러싼 과학적 증거들은 지속적인 지원을 제공하기 위해 매일 섭취해야 한다고 제안합니다.* (4)
+          <br/><br/>
+          프로바이오틱스를 섭취하고 장이 지원받는다고 느낄 때, 우리는 감사를 전할 행복한 박테리아를 내부에 가지고 있는 것입니다. 일상적인 Ritual에 장 건강 보충제를 통합하는 데 관심이 있다면 <span className="underline decoration-blue-200">Synbiotic+</span>를 확인해보세요.*
         </p>
 
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
-          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
-          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
-            <li>Williams NT. "Probiotics." American Journal of Health-System Pharmacy. 2010.</li>
-            <li>Zhang H, et al. "Impact of Probiotics on Gut Health: Clinical Evidence." International Journal of Molecular Sciences. 2018.</li>
-          </ol>
-        </div>
-      </div>
-    )
-  },
-  {
-    id: 'storage',
-    title: "유산균, 반드시 냉장 보관해야 할까요?",
-    category: "STORAGE",
-    image: "https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&q=80&w=800",
-    readTime: "3 min read",
-    content: (
-      <div className="space-y-8">
-        <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Key Takeaways</p>
-          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>모든 유산균이 냉장 보관을 필요로 하는 것은 아닙니다. 기술 발전에 따라 실온 보관 제품이 늘어나고 있습니다.</li>
-            <li>유산균의 가장 큰 적은 온도보다 '수분'입니다.</li>
-            <li>동결 건조 기술과 특수 건조 용기(CSP)는 실온에서도 유산균의 생존을 보장합니다.</li>
+          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References:</h4>
+          <ul className="list-none space-y-2 text-xs text-slate-400 font-mono">
+            <li>Bull, M. J., & Plummer, N. T. (2014, December). Part 1: The human gut microbiome in health and ... Integrative medicine (Encinitas, Calif.).</li>
+            <li>Wang, et al. (2021, October). Probiotics Regulate Gut Microbiota: An Effective Method to Improve Immunity. Molecules.</li>
+            <li>Rinninela, et al. (2019, January). What is the Healthy Gut Microbiota Composition? A Changing Ecosystem across Age, Environment, Diet, and ... Microorganisms.</li>
+            <li>Office of Dietary Supplements. Probiotics: Fact Sheet for Health Professionals. National Institutes of Health, Department of Health & Human Services. 2020.</li>
+            <li>Zheng, L., & Wen, X.-L. (2021, January 16). Gut microbiota ...: The current status and Perspectives. World journal of clinical cases. Retrieved March 20, 2023.</li>
+            <li>JL;, S. (n.d.). The role of gastric acid in preventing foodborne ... and how bacteria overcome acid conditions. Journal of food protection. Retrieved March 20, 2023.</li>
+            <li>Hemarajata, P., & Versalovic, J. (2013, January). Effects of probiotics on gut microbiota: Mechanisms of intestinal immunomodulation and neuromodulation. ... advances in gastroenterology. Retrieved March 20, 2023.</li>
           </ul>
-        </div>
-
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          "생균이니까 당연히 냉장고에 넣어야지." 많은 분들이 이렇게 생각합니다. 과거에는 이것이 정답이었습니다. 하지만 유산균 보관의 상식도 과학 기술의 발전과 함께 변화하고 있습니다. 이제는 실온에 두고 먹어도 괜찮습니다. 그 이유를 알아볼까요?
-        </p>
-
-        <hr className="border-[#E0F2FE]" />
-
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">동결 건조: 시간을 멈추는 기술</h3>
-        <p className="text-slate-600 leading-loose">
-          초기의 액상 발효유나 1세대 유산균들은 열에 매우 취약했습니다. 하지만 현대의 고품질 프로바이오틱스는 <strong>동결 건조(Freeze-drying)</strong> 공정을 거칩니다. 균을 급속 동결시킨 후 수분을 제거하여 일종의 '가사 상태(Dormant state)'로 만드는 것입니다. 이렇게 잠든 유산균은 대사 활동을 멈추기 때문에 실온에서도 생명력을 유지할 수 있습니다.
-        </p>
-
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">진짜 적은 '열'이 아니라 '습기'</h3>
-        <p className="text-slate-600 leading-loose">
-          실온 보관 시 가장 주의해야 할 것은 온도가 아니라 <strong>습기(Moisture)</strong>입니다. 미세한 수분이라도 침투하면 동결 건조된 유산균이 잠에서 깨어나게 됩니다. 먹이가 없는 캡슐 안에서 깨어난 유산균은 곧 굶어 죽게 되죠.<br/><br/>
-          Trieb Praxis는 이 문제를 해결하기 위해 <strong>CSP(Active Scavenging Polymer)</strong> 용기를 사용합니다. 용기 벽면 자체가 강력한 흡습제 역할을 하도록 설계되어 있어, 뚜껑을 여닫을 때 들어가는 미세한 수분까지 즉각적으로 제거합니다. 덕분에 냉장고 밖에서도 마지막 한 알까지 신선함을 유지합니다.
-        </p>
-
-        <h3 className="text-2xl md:text-3xl font-bold text-[#0047AB] serif-italic">눈에 보여야 챙겨 먹는다</h3>
-        <p className="text-slate-600 leading-loose">
-          냉장 보관이 필수라면 여행 갈 때 챙겨가기 어렵고, 냉장고 깊숙이 넣어두면 깜빡 잊기 쉽습니다. Trieb Praxis는 직사광선을 피해 서늘한 곳이라면 어디든 보관 가능합니다. 식탁 위, 정수기 옆, 사무실 책상 등 눈에 잘 띄는 곳에 두세요. 유산균의 효과를 보는 가장 확실한 방법은 '매일 꾸준히' 먹는 것이니까요.
-        </p>
-
-        <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
-          <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References</h4>
-          <ol className="list-decimal list-inside space-y-2 text-xs text-slate-400 font-mono">
-            <li>Broeckx G, et al. "Drying techniques of probiotic bacteria as an important step towards the development of novel pharmaceutic products." Int J Pharm. 2016.</li>
-            <li>Champagne CP, et al. "Challenges in the addition of probiotic cultures to foods." Crit Rev Food Sci Nutr. 2005.</li>
-          </ol>
         </div>
       </div>
     )
