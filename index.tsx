@@ -1,3 +1,4 @@
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -5,7 +6,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+// Fix: Use named import { App } instead of default import to match 'export const App' in App.tsx
+import { App } from './App';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
