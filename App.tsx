@@ -2,8 +2,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useInView, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, User, Timer, Menu, X, CheckCircle, ArrowRight, Minus, Plus, ChevronDown, Star, Search, Filter, ThumbsUp, ChevronRight, Trash2, Copy, AlertCircle, ArrowLeft, Clock, BookOpen, Share2, CreditCard } from 'lucide-react';
-import { Product } from './types';
 import AIChat from './components/AIChat';
+import { funnelEvents } from './services/analyticsService';
 
 // Bundle definitions
 const BUNDLES = [
@@ -62,20 +62,25 @@ const ARTICLES_DATA: ArticleData[] = [
     image: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&q=80&w=1200",
     readTime: "6 min read",
     content: (
-      <div className="space-y-8">
+      <div className="space-y-12 text-slate-600 leading-loose">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
-          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-4">Essential Takeaways</p>
+          <ul className="list-disc list-inside space-y-3 text-slate-700 font-medium text-sm md:text-base">
             <li>Praxis는 매일 섭취하는 프리, 프로, 포스트바이오틱스가 결합된 3-in-1 보충제로 장과 소화기 건강을 전면적으로 지원하도록 설계되었습니다.*</li>
             <li>인비트로(In-vitro) 테스트와 임상 연구를 통해 투명하게 검증된 원료만을 사용하며, 이것이 바로 Praxis의 진정한 가치입니다.*</li>
+            <li>우리가 사용하는 추적 가능한 원료와 엄격한 과학적 기준이 우리 제품을 특별하게 만듭니다.</li>
           </ul>
         </div>
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          우리는 장 건강을 관리할 때 단순히 유산균 하나를 먹는 것 이상의 의미가 있다고 믿습니다. 많은 사람들이 김치나 콤부차로 충분하다고 생각하지만, 과학은 더 깊은 이야기를 하고 있습니다.
-        </p>
-        <p className="text-slate-600 leading-loose">
-          Praxis는 단순히 박테리아를 넣는 것에 그치지 않습니다. 유익균이 잘 정착할 수 있도록 돕는 프리바이오틱스와, 장벽 건강을 직접적으로 지원하는 포스트바이오틱스를 하나의 지연 방출형 캡슐에 담았습니다. 이는 위산의 공격을 이겨내고 유효 성분이 장내에 도달하여 실제로 작용할 수 있게 설계된 혁신적인 솔루션입니다.*
-        </p>
+        <p className="font-bold text-slate-900">우리는 Synbiotic+에 대한 두 가지 인비트로(in-vitro) 연구를 진행했으며, 그 결과는 매우 고무적이었습니다.</p>
+        <p>건강에 있어 장은 모든 것의 중심입니다. 최근 과학은 장내 마이크로바이옴이 우리가 처음에 생각했던 것보다 훨씬 더 전반적인 건강과 밀접하게 연결되어 있음을 보여주고 있습니다. 하지만 장 건강을 관리하는 것은 단순히 유산균 하나를 먹는 것 이상의 의미가 있습니다.</p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Praxis가 다른 유산균과 차별화되는 점</h3>
+        <p>시중에는 수많은 보충제가 있지만, 우리는 "Less is more" 접근 방식을 고수합니다. 단순히 균의 숫자만 채우는 것이 아니라, 식단으로 부족한 부분을 정밀하게 보완하는 데 집중했습니다. Praxis는 프리, 프로, 포스트바이오틱스를 하나의 지연 방출형 캡슐에 담아 유효 성분이 장내에 도달하여 실제로 작용할 수 있게 설계되었습니다.*</p>
+        <h4 className="text-xl font-bold text-slate-800 mt-8 mb-3">추적 가능한 바이오틱스를 담은 3-in-1 포뮬러</h4>
+        <p>단순히 박테리아를 넣는 것에 그치지 않고, 유익균이 잘 정착할 수 있도록 돕는 프리바이오틱스와 장벽 건강을 직접적으로 지원하는 포스트바이오틱스를 결합했습니다. 이는 위산의 공격을 이겨내고 유효 성분이 장내에 도달하여 실제로 작용할 수 있게 설계되었습니다.*</p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">과학적으로 입증된 균주</h3>
+        <p>Praxis는 세계에서 가장 활발히 연구된 프로바이오틱스 균주인 LGG®와 BB-12®를 포함하고 있습니다. 또한 박테리오파지 프리바이오틱스 PreforPro®를 통해 장내 유해균을 억제하고 유익균의 성장을 돕습니다.</p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">하루 한 알 — 냉장 보관 불필요</h3>
+        <p>특수 설계된 용기를 사용하여 실온에서도 균의 생존력을 유지합니다. 여행 중이거나 사무실 책상 위에서도 언제든 편하게 섭취할 수 있습니다.*</p>
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References:</h4>
           <ul className="list-none space-y-2 text-xs text-slate-400 font-mono">
@@ -91,70 +96,30 @@ const ARTICLES_DATA: ArticleData[] = [
     id: 'meet-cfus',
     title: "보장균수(CFU) 가이드: 우리 장 건강의 진정한 지원군*",
     category: "SCIENCE",
-    image: "https://images.ctfassets.net/u9fvvze9asat/5xXpW4YxToxXqX9GvWlEwz/68e27c15e8b35c8b3c3b4a2d3e4b5c6/CFU_Guide.jpg?auto=format&fit=crop&q=80&w=1200",
+    image: "https://images.ctfassets.net/u9fvvze9asat/5xXpW4YxToxXqX9GvWlEwz/68e27c15e8b35c8b3c3b4a2d3e4b5c6/CFU_Guide.jpg",
     readTime: "4 min read",
     content: (
-      <div className="space-y-12">
+      <div className="space-y-12 text-slate-600 leading-loose">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
           <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-4">Essential Takeaways</p>
-          <ul className="list-disc list-inside space-y-4 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
+          <ul className="list-disc list-inside space-y-4 text-slate-700 font-medium text-sm md:text-base">
             <li>우리는 식단에 프로바이오틱스를 추가하는 것의 이점을 잘 알고 있지만, 유산균 포뮬러의 가장 중요한 요소 중 하나인 CFU(군집 형성 단위)에 대해 자세히 알아볼 필요가 있습니다.*</li>
             <li>장 건강을 지원하기 위해 하루에 몇십억 마리의 프로바이오틱스가 적정한지 확인해 보세요.*</li>
           </ul>
         </div>
-
-        <div className="space-y-8 text-slate-600 leading-loose">
-          <p>
-            자, 이제 프로바이오틱스에 대해서는 어느 정도 들어보셨을 겁니다. 장 건강이 우리 <span className="underline">면역 체계</span>와 전반적인 건강을 어떻게 지원하는지도 잘 알고 계시겠죠. 하지만 정작 프로바이오틱스를 특별하게 만드는 핵심 요소인 <strong>CFU</strong>에 대해서는 얼마나 알고 계신가요?
-          </p>
-          <p>
-            CFU, 즉 "군집 형성 단위(Colony forming units)"는 유산균 보충제나 실험실 샘플 내에 존재하는 활성 상태의 박테리아 세포 수를 결정하는 데 사용되는 측정 단위입니다. 쉽게 말해, CFU 수치는 해당 제품이 포함하고 있는 프로바이오틱스의 품질과 생존력에 대한 정보를 제공합니다.*
-          </p>
-          <p>
-            CFU에 대해 더 깊이 알아보고, 이것이 무엇인지, 어떤 역할을 하는지, 그리고 장 건강을 지원하기 위해 얼마나 많은 양이 필요한지 알아보겠습니다.*
-          </p>
-
-          <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">CFU란 정확히 무엇인가요?</h3>
-          <p>
-            좀 더 자세히 들어가 볼까요? Praxis 한 병을 자세히 살펴보면 영양 정보 라벨에서 해당 제품에 포함된 구체적인 박테리아 균주(예: <i>Lactobacillus rhamnosus</i> GG®)와 각 균주가 제공하는 CFU 수치를 확인할 수 있습니다. (3) <strong>CFU 수치는 제조 시점에 얼마나 많은 활성 미생물이 들어 있는지, 그리고 유통기한이 끝날 때까지 얼마나 많은 균이 살아남아 있는지를 나타냅니다.</strong> 우리가 보충제를 섭취하면, 이러한 미생물들이 장 내에서 증식하고 군집을 형성하여 장내 마이크로바이옴을 다양화할 기회를 얻게 됩니다.*
-          </p>
-          <p>
-             이제 스티커 충격에 대비하세요. CFU는 종종 수십억 단위로 계산되기 때문에, 우리 몸 안에 이미 수조 마리의 박테리아가 살고 있다는 것을 알고 계실 겁니다. 하지만 때로는 약간의 추가 지원이 필요할 때가 있습니다.*
-          </p>
-
-          <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">프로바이오틱스에서 CFU가 왜 중요한가요?</h3>
-          <p>
-            고품질의 프로바이오틱스를 선택할 때 CFU는 전체 그림의 일부일 뿐입니다. Ritual의 수석 과학자인 Arianne Vance, MPH는 "프로바이오틱스 보충제에서 단순히 CFU의 숫자에만 집중하기보다는, 그 숫자가 나타내는 품질과 과학적 근거를 확인하는 것이 훨씬 중요합니다"라고 설명합니다. 프로바이오틱스의 혜택은 <strong>균주 특이적</strong>(균주마다 다른 혜택을 제공함)이기 때문에, 단순히 양이 많은 것보다 임상적으로 연구된 균주가 포함되었는지를 먼저 확인해야 합니다. Praxis에는 이러한 과학적 검증을 마친 균주들이 정밀하게 배합되어 있습니다.*
-          </p>
-          <p>
-            쇼핑할 때 투명성을 주시하세요. 라벨에 표시된 CFU는 제조 시점에 살아있는 CFU 수를 나타낼 수도 있고, 제품의 유통기한이 끝날 때 존재하는 CFU 수를 나타낼 수도 있습니다. 이것이 중요한 이유는 보충제의 프로바이오틱스 중 일부는 제품의 유효 기간 동안 자연스럽게 사멸할 수 있기 때문입니다. (5)
-          </p>
-          <p>
-            CFU 수치와 함께 고려해야 할 또 다른 요소는 박테리아 균주입니다. 과학에 따르면 일부 프로바이오틱스의 이점은 특정 균주에 특화되어 있으므로, 모든 프로바이오틱스가 동일한 이점을 제공한다고 가정할 수 없습니다. 프로바이오틱스 보충제를 쇼핑할 때 좋은 경험 법칙은 보충제 라벨에 나열된 임상적으로 연구된 균주를 찾는 것입니다. (더 자세한 내용은 나중에 다루겠습니다.)*
-          </p>
-
-          <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">얼마나 많은 CFU가 충분할까요? 숫자가 중요할까요?</h3>
-          <p>
-            이제 CFU가 무엇인지 알았으니, 얼마나 섭취해야 할지 궁금하실 겁니다. 정답은 개인마다 다르지만 몇 가지 지침을 드릴 수 있습니다. 시중의 많은 제품들은 하루 10억에서 100억 CFU 사이를 함유하고 있지만, 일부는 500억 CFU 이상을 함유하기도 합니다. <strong>하지만 CFU 수치가 무조건 높다고 해서 제품의 혜택이 비례해서 증가하는 것은 아닙니다.</strong> (5) 포함된 균주와 그 균주 뒤에 있는 임상적 증거의 질이 CFU 수치보다 더 중요할 가능성이 높습니다.*
-          </p>
-
-          <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Trieb Praxis의 CFU 설계</h3>
-          <p>
-            장 건강 보충제인 Praxis에 대해 들어보셨을 것입니다. 우리는 3-in-1 프리, 프로, 포스트바이오틱스 보충제인 이 제품에 대해 열정을 가지고 있습니다. 품질과 과학적 증거, 그리고 CFU 함량에 있어서 우리는 타협하지 않았습니다. Praxis는 세계에서 가장 활발히 연구된 두 가지 프로바이오틱스 균주인 <strong>LGG®와 BB-12®를 110억 CFU 함유</strong>하고 있습니다. 또한 유익균의 성장을 돕는 프리바이오틱스 PreforPro®와 장벽 세포에 에너지를 공급하는 포스트바이오틱스 Tributyrin이 결합되어 있습니다.
-          </p>
-          <p>
-            모든 Ritual 제품과 마찬가지로 Praxis는 품질과 투명성을 염두에 두고 Made Traceable®로 만들어졌으므로, 매일 몸에 무엇을 넣고 있는지 알 수 있습니다.*
-          </p>
-        </div>
-
+        <p>프로바이오틱스에 대해서는 이미 많이 들어보셨을 겁니다. 하지만 정작 제품을 선택할 때 가장 헷갈리는 부분인 <strong>CFU</strong>에 대해서는 얼마나 알고 계신가요?</p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">CFU란 무엇인가요?</h3>
+        <p>CFU(Colony Forming Units)는 보충제 내에 존재하는 활성 상태의 박테리아 수를 측정하는 단위입니다. 라벨에 표시된 CFU 수치는 제조 시점 혹은 유통기한까지 살아남은 균의 숫자를 나타냅니다. 이 미생물들이 장내에서 군집을 형성하여 우리의 마이크로바이옴을 풍요롭게 만듭니다.*</p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">프로바이오틱스에서 CFU가 왜 중요한가요?</h3>
+        <p>단순히 숫자가 많다고 좋은 것은 아닙니다. 고품질 유산균을 선택할 때 CFU는 전체 그림의 일부일 뿐입니다. 우리 팀은 "단순히 숫자에 집중하기보다, 그 숫자가 나타내는 품질과 과학적 근거를 확인하는 것이 훨씬 중요하다"고 강조합니다. 임상적으로 연구된 균주가 적정한 용량으로 포함되어 있는지가 핵심입니다.</p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Trieb Praxis의 CFU 설계</h3>
+        <p>Praxis는 세계에서 가장 활발히 연구된 두 가지 균주인 LGG®와 BB-12®를 <strong>110억 CFU</strong> 함유하고 있습니다. 이는 장 건강을 지원하는 데 있어 과학적으로 검증된 최적의 용량 중 하나입니다.</p>
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References:</h4>
           <ul className="list-none space-y-4 text-xs text-slate-400 font-mono">
-            <li>1. Terpou, Antonia, Papadakis, Aikaterini, Lappa, Iliada K., Kachrimanidou, Vasiliki, Bosnea, Loulouda A., Kopsahelis, Nikolaos. (2019). Probiotics in Food Systems: Significance and Emerging Strategies Towards Improved Viability and Delivery of Enhanced Beneficial Value. Retrieved from PubMed Central.</li>
-            <li>2. Kechagia, Maria, Basoulis, Dimitrios, Konstantopoulou, Stavroula, Dimitriadi, Dimitra, Gyftopoulou, Konstantina, Skarmoutsou, Nikoletta, Fakiri, Eleni Maria. (2013). Health Benefits of Probiotics: A Review. Retrieved from PubMed Central.</li>
-            <li>3. Mazzantini, Diletta, Calvigioni, Marco, Celandroni, Francesco, Lupetti, Antonella, Ghelardi, Emilia. (2021). Spotlight on the Compositional Quality of Probiotic Formulations Marketed Worldwide. Retrieved from Frontiers in Molecular Biology.</li>
-            <li>4. Guarner F, Sanders ME, Eliakim R, et al. World Gastroenterology Organisation Global Guidelines: Probiotics and Prebiotics. 2017.</li>
-            <li>5. Office of Dietary Supplements. Probiotics: Fact Sheet for Health Professionals. National Institutes of Health, Department of Health & Human Services. 2022.</li>
+            <li>1. Terpou, Antonia, et al. (2019). Probiotics in Food Systems: Significance and Emerging Strategies Towards Improved Viability and Delivery of Enhanced Beneficial Value.</li>
+            <li>2. Kechagia, Maria, et al. (2013). Health Benefits of Probiotics: A Review.</li>
+            <li>3. Mazzantini, Diletta, et al. (2021). Spotlight on the Compositional Quality of Probiotic Formulations Marketed Worldwide.</li>
           </ul>
         </div>
       </div>
@@ -167,27 +132,26 @@ const ARTICLES_DATA: ArticleData[] = [
     image: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=1200",
     readTime: "4 min read",
     content: (
-      <div className="space-y-8">
+      <div className="space-y-12 text-slate-600 leading-loose">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
-          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>포스트바이오틱스는 장내 유익균이 식이섬유를 분해하면서 만들어내는 유익한 대사 산물입니다.*</li>
-            <li>이들은 장벽의 방어 기능을 지원하고, 장내 환경을 건강하게 유지하는 데 핵심적인 역할을 수행합니다.*</li>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-4">Essential Takeaways</p>
+          <ul className="list-disc list-inside space-y-4 text-slate-700 font-medium text-sm md:text-base">
+            <li>프리바이오틱스와 프로바이오틱스 외에, 장 건강을 완성하는 또 하나의 필수 요소인 포스트바이오틱스에 대해 알아봅니다.*</li>
+            <li>포스트바이오틱스는 장벽 세포의 건강을 직접적으로 지원하는 유익한 대사 산물입니다.*</li>
           </ul>
         </div>
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          프리바이오틱스와 프로바이오틱스에 대해서는 익숙하시겠지만, 포스트바이오틱스는 장 건강의 완성을 위한 '최종 결과물'입니다.
-        </p>
-        <p className="text-slate-600 leading-loose">
-          포스트바이오틱스는 장벽 세포의 주 에너지원인 부티르산(Butyrate) 등을 포함하며, 이는 장내 유익한 환경을 물리적으로 지원합니다. Praxis는 Tributyrin과 같은 고품질 원료를 통해 유익균이 만들어내는 이 핵심 성분을 직접 공급하여 더욱 빠르고 확실한 장 건강 관리를 가능하게 합니다. (1, 2)
-        </p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">포스트바이오틱스란 무엇인가요?</h3>
+        <p>포스트바이오틱스는 장내 유익균이 식이섬유를 분해하면서 만들어내는 유익한 화합물입니다. 대표적으로 단쇄지방산(SCFA)인 부티르산이 있으며, 이는 장벽 세포의 주요 에너지원 역할을 합니다.*</p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">포스트바이오틱스의 이점</h3>
+        <p>포스트바이오틱스는 장벽의 방어 기능을 강화하고, 장내 환경을 건강하게 유지하는 데 도움을 줍니다. 이는 단순히 균을 넣는 것을 넘어, 장 세포 자체가 건강하게 기능할 수 있도록 돕는 역할을 합니다.</p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Praxis와 포스트바이오틱스</h3>
+        <p>Praxis는 임상적으로 연구된 Tributyrin 성분을 300mg 함유하여 장까지 안전하게 도달하도록 설계되었습니다.*</p>
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References:</h4>
-          <ul className="list-none space-y-2 text-xs text-slate-400 font-mono">
-            <li>1. Wegh CAM, et al. Postbiotics and Their Potential Applications in Early Life Nutrition and Beyond. 2019.</li>
-            <li>2. Campos-Perez W, et al. Effects of short chain fatty acids on metabolic health. 2021.</li>
-            <li>3. Gibson GR, et al. Dietary modulation of the human colonic microbiota. 1995.</li>
-            <li>4. MD. Toni Golen, et al. "What Are Postbiotics?" Harvard Health. 2021.</li>
+          <ul className="list-none space-y-4 text-xs text-slate-400 font-mono">
+            <li>1. Wegh CAM, et al. (2019). Postbiotics and Their Potential Applications in Early Life Nutrition and Beyond.</li>
+            <li>2. Campos-Perez W, et al. (2021). Effects of short chain fatty acids on metabolic health.</li>
+            <li>3. MD. Toni Golen, et al. (2021). "What Are Postbiotics?" Harvard Health.</li>
           </ul>
         </div>
       </div>
@@ -200,26 +164,23 @@ const ARTICLES_DATA: ArticleData[] = [
     image: "https://images.unsplash.com/photo-1506330682178-5c41e4439c37?auto=format&fit=crop&q=80&w=1200",
     readTime: "3 min read",
     content: (
-      <div className="space-y-8">
+      <div className="space-y-12 text-slate-600 leading-loose">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
-          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>네, 프로바이오틱스 보충제 속 살아있는 박테리아에도 유효기간이 있습니다.*</li>
-            <li>유통기한은 균의 종류, 캡슐화 기술, 그리고 보관 방법에 따라 달라집니다.*</li>
-            <li>Praxis는 제조일로부터 1년간의 안정적인 유효 기간을 보장합니다.*</li>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-4">Essential Takeaways</p>
+          <ul className="list-disc list-inside space-y-4 text-slate-700 font-medium text-sm md:text-base">
+            <li>유산균 속 살아있는 박테리아에도 유통기한이 있습니다. 시간이 지나면 균의 생존 능력이 자연스럽게 감소합니다.*</li>
+            <li>유통기한은 균의 종류, 캡슐화 기술, 보관 방법에 따라 달라집니다.</li>
           </ul>
         </div>
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          살아있는 생명체인 프로바이오틱스는 시간이 지남에 따라 그 생존 능력이 자연스럽게 감소합니다. 따라서 단순히 유통기한 내에 섭취하는 것뿐만 아니라, 그 기한까지 균수가 유지되도록 설계되었는지가 중요합니다.
-        </p>
-        <p className="text-slate-600 leading-loose">
-          Praxis는 외부 습기와 빛을 차단하는 특수 용기와 지연 방출형 캡슐 기술을 통해, 실온에서도 마지막 한 알까지 보장균수가 안정적으로 유지되도록 설계되었습니다. (1, 2)
-        </p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">유산균은 얼마나 오래 지속되나요?</h3>
+        <p>대부분의 고품질 유산균은 제조 후 약 1년에서 2년 정도의 유효 기간을 가집니다. Praxis는 특수 설계된 수분 차단 용기와 기술을 통해 유통기한의 마지막 날까지 보장균수가 유지되도록 설계되었습니다.*</p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">유통기한이 지난 유산균을 먹어도 되나요?</h3>
+        <p>독성이 생기는 것은 아니지만 균수가 줄어들어 기대하는 효과를 보기 어렵습니다. 항상 신선한 제품을 섭취하는 것이 좋습니다.</p>
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References:</h4>
-          <ul className="list-none space-y-2 text-xs text-slate-400 font-mono">
-            <li>1. Wilcox, et al. (2020). "Expired Probiotics: What is Really in Your Cabinet?"</li>
-            <li>2. Council for Responsible Nutrition. (2017). Best Practices Guidelines for Probiotics.</li>
+          <ul className="list-none space-y-4 text-xs text-slate-400 font-mono">
+            <li>1. Wilcox, Hannah, et al. (2020). "Expired Probiotics: What is Really in Your Cabinet?"</li>
+            <li>2. Best Practices Guidelines for Probiotics. (2017). Council for Responsible Nutrition.</li>
             <li>3. Fenster, et al. (2019). The Production and Delivery of Probiotics.</li>
           </ul>
         </div>
@@ -233,27 +194,23 @@ const ARTICLES_DATA: ArticleData[] = [
     image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&q=80&w=1200",
     readTime: "4 min read",
     content: (
-      <div className="space-y-8">
+      <div className="space-y-12 text-slate-600 leading-loose">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
-          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>박테리아는 전반적인 건강 유지에 중요한 역할을 하며, 장내 마이크로바이옴은 우리 몸의 '컨트롤 센터'와 같습니다.*</li>
-            <li>프로바이오틱스는 장내 '유익균'의 성장을 지원하고, 건강한 균형을 유지하도록 돕습니다.*</li>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-4">Essential Takeaways</p>
+          <ul className="list-disc list-inside space-y-4 text-slate-700 font-medium text-sm md:text-base">
+            <li>박테리아는 우리 전반적인 웰빙에 핵심적인 역할을 하며, 장은 소화뿐만 아니라 면역의 중심입니다.*</li>
+            <li>프로바이오틱스는 장내 '착한 박테리아'의 군집 형성을 도와 건강한 마이크로바이옴을 조성합니다.*</li>
           </ul>
         </div>
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          여러분이 유산균을 섭취하면, 이들은 장내 미생물 생태계에 합류하여 유해균의 성장을 억제하고 유익한 환경을 조성하기 시작합니다.
-        </p>
-        <p className="text-slate-600 leading-loose">
-          하지만 단순히 먹는 것만으로는 부족합니다. 캡슐이 위산을 견디고 안전하게 대장에 도달해야 하며, 그곳에서 살아남아 번식할 수 있는 환경이 갖춰져야 합니다. Praxis의 3-in-1 시스템은 균주가 장에 무사히 정착할 수 있도록 '먹이'와 '대사 산물'을 동시에 공급하는 정교한 메커니즘으로 작동합니다.
-        </p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">유산균의 작용 원리</h3>
+        <p>Praxis의 지연 방출형 캡슐은 균이 위산을 견디고 안전하게 장에 도달하여 정착할 수 있도록 보호막 역할을 합니다. 장에 도달한 유익균은 유해균의 성장을 억제하고 장벽을 튼튼하게 만듭니다.*</p>
+        <p>이 과정은 단순히 균을 보충하는 것이 아니라, 장내 생태계의 균형을 되찾아 전반적인 신체 기능을 개선하는 과학적인 메커니즘입니다.</p>
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References:</h4>
-          <ul className="list-none space-y-2 text-xs text-slate-400 font-mono">
+          <ul className="list-none space-y-4 text-xs text-slate-400 font-mono">
             <li>1. Bull, M. J., & Plummer, N. T. (2014). The human gut microbiome in health and disease.</li>
             <li>2. Wang, et al. (2021). Probiotics Regulate Gut Microbiota: An Effective Method to Improve Immunity.</li>
-            <li>3. Office of Dietary Supplements. NIH. (2020). Probiotics Fact Sheet.</li>
-            <li>4. Hemarajata, P., & Versalovic, J. (2013). Effects of probiotics on gut microbiota: Mechanisms of action.</li>
+            <li>3. Hemarajata, P., & Versalovic, J. (2013). Effects of probiotics on gut microbiota: Mechanisms of action.</li>
           </ul>
         </div>
       </div>
@@ -266,27 +223,23 @@ const ARTICLES_DATA: ArticleData[] = [
     image: "https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&q=80&w=1200",
     readTime: "6 min read",
     content: (
-      <div className="space-y-8">
+      <div className="space-y-12 text-slate-600 leading-loose">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
-          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>프로바이오틱스는 장내 웰빙을 돕는 유익한 박테리아입니다.*</li>
-            <li>언제 섭취하는 것이 가장 좋은지는 여전히 많은 논의가 있지만, 과학적 근거를 바탕으로 한 가이드를 제안합니다.*</li>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-4">Essential Takeaways</p>
+          <ul className="list-disc list-inside space-y-4 text-slate-700 font-medium text-sm md:text-base">
+            <li>프로바이오틱스 섭취 타이밍에 대한 논의는 많지만, 핵심은 생존력입니다.*</li>
+            <li>위산으로부터 균을 보호할 수 있는 시간대를 선택하는 것이 중요합니다.</li>
           </ul>
         </div>
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          많은 분들이 아침 공복에 먹어야 하는지, 식사 후에 먹어야 하는지 궁금해합니다. 사실 가장 중요한 것은 '매일 일정한 시간에 꾸준히 먹는 습관'입니다.
-        </p>
-        <p className="text-slate-600 leading-loose">
-          일부 연구는 공복 섭취가 균의 도달률을 높인다고 하지만, Praxis와 같이 지연 방출형 캡슐 기술이 적용된 제품은 섭취 시간과 관계없이 위산으로부터 균을 안전하게 보호합니다. 따라서 여러분의 라이프스타일에 맞춰 잊지 않고 먹을 수 있는 최적의 루틴을 만드는 것이 정답입니다.
-        </p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">최적의 시간은 언제인가요?</h3>
+        <p>연구에 따르면 식사 30분 전 혹은 식사 시작 시점에 섭취할 때 균의 생존율이 가장 높았습니다. 하지만 Praxis는 지연 방출형 캡슐로 위산으로부터 보호되므로 언제든 편하게 섭취하셔도 좋습니다.*</p>
+        <p>가장 중요한 것은 매일 잊지 않고 꾸준히 섭취하는 습관입니다.</p>
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References:</h4>
-          <ul className="list-none space-y-2 text-xs text-slate-400 font-mono">
-            <li>1. WHO Global Guidelines: Probiotics and Prebiotics. (2017).</li>
-            <li>2. NIH. Probiotics: Fact Sheet for Health Professionals. (2020).</li>
+          <ul className="list-none space-y-4 text-xs text-slate-400 font-mono">
+            <li>1. Guarner F, et al. (2017). World Gastroenterology Organisation Global Guidelines: Probiotics and Prebiotics.</li>
+            <li>2. Office of Dietary Supplements. NIH. (2020). Probiotics Fact Sheet.</li>
             <li>3. McFarland, L. V. (2015). From yaks to yogurt: The history of probiotics.</li>
-            <li>4. Lynch SV, Pedersen O. N Engl J Med. (2016).</li>
           </ul>
         </div>
       </div>
@@ -299,27 +252,23 @@ const ARTICLES_DATA: ArticleData[] = [
     image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200",
     readTime: "5 min read",
     content: (
-      <div className="space-y-8">
+      <div className="space-y-12 text-slate-600 leading-loose">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
-          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>유산균 보충제의 효과를 평가할 때는 단순히 물리적인 느낌 그 이상의 지표들이 필요합니다.*</li>
-            <li>적응 기간부터 실제 변화가 나타나기까지, 여러분이 주목해야 할 신호들을 정리했습니다.*</li>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-4">Essential Takeaways</p>
+          <ul className="list-disc list-inside space-y-4 text-slate-700 font-medium text-sm md:text-base">
+            <li>유산균을 먹기 시작한 후 몸에 나타나는 변화를 어떻게 판단해야 할까요? 신호는 생각보다 명확합니다.*</li>
+            <li>초기 2주간의 적응 기간을 이해하는 것이 중요합니다.</li>
           </ul>
         </div>
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          새로운 유산균을 먹기 시작하면 장내 미생물 지형도가 바뀌기 시작합니다. 처음 1~2주 동안은 가벼운 가스나 꾸르륵거림을 느낄 수 있는데, 이는 '적응기'의 자연스러운 현상입니다.
-        </p>
-        <p className="text-slate-600 leading-loose">
-          2주 이후부터는 배변의 규칙성이 개선되거나, 식사 후 습관적으로 느끼던 더부룩함이 줄어드는 것을 경험할 수 있습니다. 장 건강은 면역력 및 에너지 수치와도 직결되어 있으므로, 장기적으로는 전반적인 신체 활력이 좋아지는 것을 느끼는 것이 유산균이 제 역할을 하고 있다는 가장 큰 신호입니다.
-        </p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">변화를 관찰하세요</h3>
+        <p>적응 기간 동안 가벼운 가스가 발생할 수 있지만 곧 사라집니다. 이후 배변 활동의 규칙성이 개선되고 식후 더부룩함이 줄어드는 것이 유산균이 작용하고 있다는 대표적인 신호입니다.*</p>
+        <p>장기적으로는 피부 컨디션이나 전반적인 활력이 좋아지는 것을 느낄 수 있습니다.</p>
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References:</h4>
-          <ul className="list-none space-y-2 text-xs text-slate-400 font-mono">
-            <li>1. WHO World Gastroenterology Organisation. (2017).</li>
-            <li>2. Lynch SV, Pedersen O. The Human Intestinal Microbiome. (2016).</li>
-            <li>3. Robles Alonso V, et al. Linking the gut microbiota to human health. (2013).</li>
-            <li>4. Gilbert JA, et al. Current understanding of the human microbiome. (2018).</li>
+          <ul className="list-none space-y-4 text-xs text-slate-400 font-mono">
+            <li>1. Lynch SV, Pedersen O. (2016). The human intestinal microbiome.</li>
+            <li>2. Gilbert JA, et al. (2018). Current understanding of the human microbiome.</li>
+            <li>3. Robles Alonso V, et al. (2013). Linking the gut microbiota to human health.</li>
           </ul>
         </div>
       </div>
@@ -332,27 +281,23 @@ const ARTICLES_DATA: ArticleData[] = [
     image: "https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&q=80&w=1200",
     readTime: "4 min read",
     content: (
-      <div className="space-y-8">
+      <div className="space-y-12 text-slate-600 leading-loose">
         <div className="bg-[#F0F7FF] p-8 rounded-2xl border-l-4 border-[#0047AB] shadow-sm">
-          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-2">Essential Takeaways</p>
-          <ul className="list-disc list-inside space-y-2 text-slate-700 font-medium leading-relaxed text-sm md:text-base">
-            <li>모든 유산균이 냉장 보관을 필요로 하는 것은 아닙니다. 기술 발전에 따라 실온에서도 안정적인 'Shelf-stable' 제품들이 많아졌습니다.*</li>
-            <li>냉장 보관 유무보다 습기 제어와 균주의 안정성이 더 중요합니다.*</li>
+          <p className="font-bold text-[#0047AB] uppercase tracking-widest text-xs mb-4">Essential Takeaways</p>
+          <ul className="list-disc list-inside space-y-4 text-slate-700 font-medium text-sm md:text-base">
+            <li>유산균은 살아있는 생명체이기에 온도와 습도에 민감합니다. 하지만 모든 유산균이 냉장 보관을 필요로 하는 것은 아닙니다.*</li>
+            <li>제조 기술의 발달로 실온에서도 안정적인 제품들이 많아졌습니다.</li>
           </ul>
         </div>
-        <p className="lead text-lg md:text-xl font-medium text-slate-800 leading-loose">
-          과거에는 유산균의 활성을 유지하기 위해 냉장 보관이 필수였지만, 현대의 제조 기술은 이를 뛰어넘었습니다.
-        </p>
-        <p className="text-slate-600 leading-loose">
-          Praxis는 실온에서도 박테리아의 생존 능력을 유지하도록 습기 방지 기술이 적용된 병을 사용합니다. 이는 여행 중이거나 책상 위에 두고 언제든 편하게 섭취할 수 있게 하여, 결과적으로 섭취의 꾸준함을 도와 장 건강 혜택을 극대화합니다.
-        </p>
+        <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-4">실온 보관이 가능한 Praxis</h3>
+        <p>Praxis는 습기를 완벽히 차단하는 특수 이중벽 구조의 병을 사용하여 마지막 한 알까지 실온에서도 안정적으로 섭취할 수 있게 설계되었습니다.*</p>
+        <p>냉장 보관의 번거로움이 없기 때문에 여행 중이거나 이동 중에도 꾸준한 섭취가 가능합니다.</p>
         <div className="mt-12 pt-8 border-t border-[#E0F2FE]">
           <h4 className="font-bold text-slate-400 uppercase tracking-widest text-xs mb-4">References:</h4>
-          <ul className="list-none space-y-2 text-xs text-slate-400 font-mono">
-            <li>1. IPA Best Practices for Probiotics in Dietary Supplements. (2023).</li>
-            <li>2. Yoha, et al. Targeted Delivery of Probiotics: Perspectives. (2022).</li>
-            <li>3. Fenster, et al. The Production and Delivery of Probiotics. (2019).</li>
-            <li>4. Govender M, et al. Convention vs. Non-conventional Formulations. (2014).</li>
+          <ul className="list-none space-y-4 text-xs text-slate-400 font-mono">
+            <li>1. Best Practices Guidelines for Probiotics. (2017). International Probiotics Association.</li>
+            <li>2. Govender M, et al. (2014). A Review of the Advancements in Probiotic Delivery.</li>
+            <li>3. Fenster, et al. (2019). The Production and Delivery of Probiotics.</li>
           </ul>
         </div>
       </div>
@@ -935,6 +880,7 @@ const SoldOutPopup = ({ onClose }: { onClose: () => void }) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(code);
     setCopied(true);
+    funnelEvents.discountCopied(code);
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -1027,11 +973,24 @@ export const App: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [popupStage, setPopupStage] = useState<'none' | 'welcome' | 'selection' | 'soldout'>('none');
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [phone, setPhone] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(() => setPopupStage('welcome'), 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  const handlePopupClose = () => {
+    setPopupStage('none');
+    funnelEvents.popupClosed();
+  };
+
+  const handlePhoneSubmit = () => {
+    if(phone.length >= 10) {
+      funnelEvents.phoneSubmitted(phone);
+      setPopupStage('selection');
+    }
+  };
 
   const handleShopNav = () => {
     setCurrentView('home');
@@ -1055,6 +1014,7 @@ export const App: React.FC = () => {
   };
 
   const addBundleToCart = (bundle: any) => {
+    funnelEvents.addToCart(bundle.id, bundle.name, bundle.salePrice);
     setCartItems(prev => {
       const existing = prev.find(i => i.id === bundle.id);
       if (existing) return prev.map(i => i.id === bundle.id ? { ...i, qty: i.qty + 1 } : i);
@@ -1092,6 +1052,8 @@ export const App: React.FC = () => {
   };
 
   const handleCheckout = () => {
+    const total = cartItems.reduce((acc, i) => acc + (i.salePrice * i.qty), 0);
+    funnelEvents.checkoutInitiated(total, cartItems.length);
     setIsCartOpen(false);
     setPopupStage('soldout');
   };
@@ -1153,7 +1115,7 @@ export const App: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }}
               className="relative bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row"
             >
-              <button onClick={() => setPopupStage('none')} className="absolute top-4 right-4 p-2 text-slate-400 z-10"><X className="w-5 h-5" /></button>
+              <button onClick={handlePopupClose} className="absolute top-4 right-4 p-2 text-slate-400 z-10"><X className="w-5 h-5" /></button>
               <div className="md:w-1/2 bg-[#F0F7FF] p-10 flex items-center justify-center relative">
                  <div className="w-24 h-40 border-4 border-[#E0F2FE] rounded-full bg-white shadow-xl flex items-center justify-center">
                     <div className="w-16 h-16 bg-[#E0F2FE] rounded-full blur-xl animate-pulse" />
@@ -1164,8 +1126,8 @@ export const App: React.FC = () => {
                 <h2 className="text-4xl md:text-5xl font-bold text-[#0047AB] serif-italic leading-tight mb-6">첫 주문 <br/>52% 할인 받기</h2>
                 <p className="text-sm text-slate-500 font-medium leading-relaxed mb-8">트립 멤버십에 가입하고 첫 주문 52% 할인 코드와 장 건강을 위한 인사이트를 받아보세요.</p>
                 <div className="space-y-4">
-                  <input type="tel" placeholder="휴대폰 번호" className="w-full px-6 py-4 rounded-full border border-[#E0F2FE] bg-[#F0F7FF] focus:outline-none focus:ring-2 focus:ring-blue-100 focus:bg-white transition-all text-sm font-medium" />
-                  <button onClick={() => setPopupStage('selection')} className="w-full bg-[#0047AB] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-2 hover:bg-blue-800 transition-colors shadow-lg">할인받기 <ArrowRight className="w-4 h-4" /></button>
+                  <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="휴대폰 번호" className="w-full px-6 py-4 rounded-full border border-[#E0F2FE] bg-[#F0F7FF] focus:outline-none focus:ring-2 focus:ring-blue-100 focus:bg-white transition-all text-sm font-medium" />
+                  <button onClick={handlePhoneSubmit} className="w-full bg-[#0047AB] text-white py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-2 hover:bg-blue-800 transition-colors shadow-lg">할인받기 <ArrowRight className="w-4 h-4" /></button>
                   <p className="text-[9px] text-slate-300 text-center mt-3 leading-tight">
                     * <span className="underline cursor-pointer hover:text-slate-400 decoration-slate-200 underline-offset-2">개인정보 수집 및 이용</span>에 동의합니다.
                   </p>
